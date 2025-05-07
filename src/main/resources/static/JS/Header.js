@@ -3,7 +3,7 @@ function createHeader() {
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">MyWebsite</a>                    
+                    <a class="navbar-brand" href="#">Urban logo.png</a>                    
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
