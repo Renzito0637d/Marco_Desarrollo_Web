@@ -1,0 +1,14 @@
+footer{
+    background-color: white;
+}
+.conte{   
+    max-width: 1300px;
+    margin: 0px auto;
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.text{
+    text-align: center;
+    padding: 20px;
+}
