@@ -1,7 +1,13 @@
 function createHeader() {
+    // Cargar el CSS principal
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = '../static/CSS/Header.css';
+  document.head.appendChild(link);
+
     const headerHTML = `
         <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="container navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">Urban logo.png</a>                    
                     <div class="collapse navbar-collapse" id="navbarNav">
