@@ -6,29 +6,28 @@ function createHeader() {
   document.head.appendChild(link);
 
     const headerHTML = `
-        <header>
-            <nav class="container navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Urban logo.png</a>                    
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Nosotros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Contactanos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Redes</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+        <header class="p-3 bg-dark text-white">
+      <div class="contenedor">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="../templates/Inicio.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <img src="../static/IMG/logo.png" alt="Logo" class="logo">
+          </a>
+
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Nosotros</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Contactanos</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Redes</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          </ul>
+
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">Login</button>
+            <button type="button" class="btn btn-warning">Sign-up</button>
+          </div>
+        </div>
+      </div>
+    </header>
     `;
     document.body.insertAdjacentHTML('afterbegin', headerHTML);
 }
