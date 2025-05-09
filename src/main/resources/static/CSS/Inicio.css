@@ -84,7 +84,7 @@ body {
 
 /* General styles for the section */
 .categories-section {
-  padding: 2rem;
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -163,3 +163,16 @@ body {
 .card-overlay .btn:hover {
   background-color: #c82333; /* Color del botón al hacer hover */
 }
+
+.novedades{
+  display: flex;
+  gap: 30px;
+}
+
+.card-img-top{
+  mask-image: linear-gradient(
+    white 80%,
+    transparent
+  );
+}
+
