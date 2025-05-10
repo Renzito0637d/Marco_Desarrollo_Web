@@ -1,0 +1,181 @@
+html{
+  scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f2f2f2;
+	border: 0px;
+  position: relative;
+  overflow: auto;	
+}
+
+.contenedor{
+  margin:0px auto;
+	max-width:1300px;
+  margin: 20px auto;
+}
+
+.carousel-item {
+  height: 500px;
+}
+.full{
+  height: 100%;
+}
+
+.publicidad img{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  
+  justify-content: center;
+  align-items: center;
+}
+
+.marcas-section h2 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.carr {
+  width: 75vw;
+  height: auto;
+  
+  overflow: hidden;
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
+}
+
+.carr .slide-track {
+  display: flex;
+  animation: scroll 25s linear infinite;
+  -webkit-animation: scroll 25s linear infinite;
+  width: calc(200px * 14);
+  gap: 110px;
+  justify-content: center;
+}
+
+.carr .slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carr .slide img {
+  width: 300px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+@keyframes scroll {
+  0% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+  }
+  100% {
+      -webkit-transform: translateX(calc(-200px * 7));
+      transform: translateX(calc(-200px * 7));
+  }
+}
+
+/* General styles for the section */
+.categories-section {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Card container */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+/* Estilos para las tarjetas */
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1); /* Zoom en la imagen al pasar el mouse */
+}
+
+/* Overlay que aparece al hacer hover */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease; 
+}
+
+.card-overlay h3 {
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card:hover .card-overlay {
+  opacity: 1; /* Muestra el overlay al hacer hover */
+}
+
+.card-overlay .btn {
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #dc3545; /* Color del botón */
+  border: none;
+  text-decoration: none;
+}
+
+.card-overlay .btn:hover {
+  background-color: #c82333; /* Color del botón al hacer hover */
+}
+
+.novedades{
+  display: flex;
+  gap: 30px;
+}
+
+.card-img-top{
+  mask-image: linear-gradient(
+    white 80%,
+    transparent
+  );
+}
+
