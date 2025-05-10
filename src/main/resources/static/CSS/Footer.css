@@ -12,3 +12,8 @@ footer{
     text-align: center;
     padding: 20px;
 }
+
+.nav{
+    padding-left: 10px;
+    gap:10px
+}
