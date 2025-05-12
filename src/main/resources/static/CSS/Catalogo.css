@@ -56,3 +56,78 @@ body {
     color: #000000;
     border-color: #000000;
 }
+
+.filters {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.btn-primary,
+.btn-outline-primary {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
+}
+
+.form-select,
+.form-check-input {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+}
+
+.form-select:focus,
+.form-check-input:focus,
+.form-range:focus {
+    border-color: #000000;
+}
+
+.form-check-label {
+    color: #000000;
+}
+
+.form-check-input:checked {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.form-check-input:checked {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: #000000;
+}
+
+.form-range::-moz-range-thumb {
+    background-color: #000000;
+}
+
+.form-range::-ms-thumb {
+    background-color: #000000;
+}
+
+.form-check-label {
+    color: #000000;
+}
+
+.form-select:focus {
+    border-color: #000000;
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.form-select option {
+    background-color: #ffffff;
+    color: #000000;
+}
