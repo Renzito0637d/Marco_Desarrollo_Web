@@ -1,70 +1,190 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Libro de Reclamaciones</title>
-  <script src="../static/JS/Header.js" type="text/javascript"></script>
-  <link rel="stylesheet" href="../static/CSS/Reclamos.css">
-  
-  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <div class="contenedor">
-    
-    <script>
-      createHeader();
-    </script>
+  <header id="main-header"></header>
 
-    <h1 class="section-title">Libro de Reclamaciones</h1>
+  <main class="container my-5">
+    <h1 class="text-center mb-4">Libro de Reclamaciones</h1>
 
-    <form action="#" method="POST" class="formulario-reclamo">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form action="#" method="POST" novalidate>
+          
+          <!-- Datos del Consumidor -->
+          <fieldset class="mb-4">
+            <legend class="h5 mb-3">Datos del Consumidor</legend>
 
-      <fieldset>
-        <legend>Datos del Consumidor</legend>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre completo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombre"
+                  name="nombre"
+                  placeholder="Ej: Juan Pérez García"
+                  required
+                />
+              </div>
 
-        <label for="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" name="nombre" required>
+              <div class="col-md-6">
+                <label for="documento" class="form-label">DNI o CE</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="documento"
+                  name="documento"
+                  pattern="[0-9]{8}|[0-9]{12}"
+                  placeholder="00000000"
+                  required
+                />
+                <div class="invalid-feedback">Ingrese un número de documento válido.</div>
+              </div>
 
-        <label for="documento">DNI o CE:</label>
-        <input type="text" id="documento" name="documento" required>
+              <div class="col-12">
+                <label for="domicilio" class="form-label">Domicilio</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="domicilio"
+                  name="domicilio"
+                  placeholder="Calle, número, distrito, provincia"
+                  required
+                />
+              </div>
 
-        <label for="domicilio">Domicilio:</label>
-        <input type="text" id="domicilio" name="domicilio" required>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="usuario@ejemplo.com"
+                />
+              </div>
 
-        <label for="email">Correo electrónico:</label>
-        <input type="email" id="email" name="email">
+              <div class="col-md-6">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="telefono"
+                  name="telefono"
+                  placeholder="999999999"
+                />
+              </div>
+            </div>
+          </fieldset>
 
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono">
-      </fieldset>
+          <!-- Detalle del Reclamo -->
+          <fieldset>
+            <legend class="h5 mb-3">Detalle del Reclamo</legend>
 
-      <fieldset>
-        <legend>Detalle del Reclamo</legend>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="producto" class="form-label">Producto</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="producto"
+                  name="producto"
+                  placeholder="Producto o servicio"
+                  required
+                />
+              </div>
 
-        <label for="producto">Producto:</label>
-        <input type="text" id="producto" name="producto" required>
+              <div class="col-md-6">
+                <label for="monto" class="form-label">Monto reclamado (S/)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  class="form-control"
+                  id="monto"
+                  name="monto"
+                  placeholder="0.00"
+                />
+              </div>
 
-        <label for="monto">Monto reclamado (S/):</label>
-        <input type="number" id="monto" name="monto" step="0.01">
+              <div class="col-md-6">
+                <label for="tipo" class="form-label">Tipo de mensaje</label>
+                <select class="form-select" id="tipo" name="tipo" required>
+                  <option selected disabled value="">Seleccione</option>
+                  <option value="Reclamo">Reclamo</option>
+                  <option value="Queja">Queja</option>
+                </select>
+              </div>
 
-        <label for="tipo">Tipo de mensaje:</label>
-        <select id="tipo" name="tipo" required>
-          <option value="">Seleccione</option>
-          <option value="Reclamo">Reclamo</option>
-          <option value="Queja">Queja</option>
-        </select>
+              <div class="col-12">
+                <label for="detalle" class="form-label">Detalle del reclamo</label>
+                <textarea
+                  class="form-control"
+                  id="detalle"
+                  name="detalle"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
 
-        <label for="detalle">Detalle del reclamo:</label>
-        <textarea id="detalle" name="detalle" rows="4" required></textarea>
+              <div class="col-12">
+                <label for="pedido" class="form-label">¿Qué solución propone?</label>
+                <textarea
+                  class="form-control"
+                  id="pedido"
+                  name="pedido"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+            </div>
+          </fieldset>
 
-        <label for="pedido">¿Qué solución propone?</label>
-        <textarea id="pedido" name="pedido" rows="3" required></textarea>
-      </fieldset>
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">
+              Enviar Reclamo
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
 
-      <button type="submit" class="btn1">Enviar Reclamo</button>
-    </form>
-    
-  </div>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"
+  ></script>
 
+  <script src="../static/JS/Header.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof createHeader === "function") {
+        createHeader();
+      }
+    });
+
+    // Validación Bootstrap personalizada
+    (function () {
+      const forms = document.querySelectorAll("form");
+      Array.from(forms).forEach(form => {
+        form.addEventListener("submit", event => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add("was-validated");
+        }, false);
+      });
+    })();
+  </script>
 </body>
 </html>
