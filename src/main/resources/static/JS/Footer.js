@@ -9,7 +9,7 @@ function createFooter() {
     <footer>
         <div class="conte row row-cols-1 row-cols-sm-2 row-cols-md-5">
             <div class="col mb-3"> 
-                <a href="/" >
+                <a href="../templates/reclamos.html" >
                 <img src="../static/IMG/libroreclacion.png" alt="Logo UrbanFeet" class="d-inline-block align-text-top libro" style="width:100%">
                 </a>
             </div>
@@ -36,7 +36,7 @@ function createFooter() {
                 </ul>
             </div>
             <div class="col mb-3">
-                <h5>Cotalogo</h5>
+                <h5>Catálogo</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Mujer</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hombre</a></li>
