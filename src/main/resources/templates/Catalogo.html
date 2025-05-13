@@ -24,8 +24,8 @@
         <div class="row mb-4">
             <div class="col-md-3">
                 <div class="filters">
-                    <h5>Filtrar por:</h5>
-                    <div class="mb-3">
+                    <h5 class="mb-4">Filtrar por:</h5>
+                    <div class="mb-2">
                         <label class="form-label">Marcas</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Nike" id="marcaNike">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="genero" class="form-label">Género</label>
                         <select class="form-select" id="genero">
                             <option value="">Todos</option>
@@ -63,16 +63,20 @@
                             <option>Niña</option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="marca" class="form-label">Tipo</label>
                         <select class="form-select" id="tipo">
                             <option value="">Todos</option>
-                            <option>Nike</option>
-                            <option>Adidas</option>
-                            <option>iRun</option>
+                            <option>Running</option>
+                            <option>Futbol</option>
+                            <option>Training</option>
+                            <option>Outdoor</option>
+                            <option>Sneakers</option>
+                            <option>lifestyle</option>
+                            <option>Otros</option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="color" class="form-label">Color</label>
                         <select class="form-select" id="color">
                             <option value="">Todos</option>
@@ -80,13 +84,14 @@
                             <option>Blanco</option>
                             <option>Rojo</option>
                             <option>Azul</option>
+                            <option>Otros</option>
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="precio" class="form-label">Precio máximo</label>
+                    <div class="mb-4">
+                        <label for="precio" class="form-label">Precio</label>
                         <input type="range" class="form-range" min="0" max="3000" step="10" id="precio">
-                        <span id="precio-valor">$150</span>
+                        <span id="precio-valor">S/150</span>
                     </div>
                     <button class="btn btn-primary w-100">Buscar</button>
                 </div>
@@ -106,10 +111,10 @@
                     <!-- Producto 1 -->
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Zapatilla">
+                            <img src="../static/IMG/novedadZap1.png" class="card-img-top" alt="Zapatilla">
                             <div class="card-body">
-                                <h5 class="card-title">Nike Air Zoom</h5>
-                                <p class="card-text">$120 - Hombre - Negro</p>
+                                <h5 class="card-title">Nike Revolution 7</h5>
+                                <p class="card-text">S/ 219.90</p>
                                 <button class="btn btn-outline-primary w-100">Ver más</button>
                             </div>
                         </div>
@@ -118,10 +123,10 @@
                     <!-- Producto 2 -->
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Zapatilla">
+                            <img src="../static/IMG/novedadZap2.png" class="card-img-top" alt="Zapatilla">
                             <div class="card-body">
-                                <h5 class="card-title">Adidas Ultraboost</h5>
-                                <p class="card-text">$180 - Mujer - Blanco</p>
+                                <h5 class="card-title">Chimpunes predator</h5>
+                                <p class="card-text">S/ 349.00</p>
                                 <button class="btn btn-outline-primary w-100">Ver más</button>
                             </div>
                         </div>
@@ -130,16 +135,116 @@
                     <!-- Producto 3 -->
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Zapatilla">
+                            <img src="../static/IMG/novedadZap3.png" class="card-img-top" alt="Zapatilla">
                             <div class="card-body">
-                                <h5 class="card-title">iRun Runner</h5>
-                                <p class="card-text">$90 - Niño - Azul</p>
+                                <h5 class="card-title">Zapatillas Freestyle</h5>
+                                <p class="card-text">S/ 159.00</p>
                                 <button class="btn btn-outline-primary w-100">Ver más</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Puedes añadir más productos aquí -->
+
+                    <!-- Producto 1 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="../static/IMG/novedadZap1.png" class="card-img-top" alt="Zapatilla">
+                            <div class="card-body">
+                                <h5 class="card-title">Nike Revolution 7</h5>
+                                <p class="card-text">S/ 219.90</p>
+                                <button class="btn btn-outline-primary w-100">Ver más</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="../static/IMG/novedadZap2.png" class="card-img-top" alt="Zapatilla">
+                            <div class="card-body">
+                                <h5 class="card-title">Chimpunes predator</h5>
+                                <p class="card-text">S/ 349.00</p>
+                                <button class="btn btn-outline-primary w-100">Ver más</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="../static/IMG/novedadZap3.png" class="card-img-top" alt="Zapatilla">
+                            <div class="card-body">
+                                <h5 class="card-title">Zapatillas Freestyle</h5>
+                                <p class="card-text">S/ 159.00</p>
+                                <button class="btn btn-outline-primary w-100">Ver más</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 1 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="../static/IMG/novedadZap1.png" class="card-img-top" alt="Zapatilla">
+                            <div class="card-body">
+                                <h5 class="card-title">Nike Revolution 7</h5>
+                                <p class="card-text">S/ 219.90</p>
+                                <button class="btn btn-outline-primary w-100">Ver más</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="../static/IMG/novedadZap2.png" class="card-img-top" alt="Zapatilla">
+                            <div class="card-body">
+                                <h5 class="card-title">Chimpunes predator</h5>
+                                <p class="card-text">S/ 349.00</p>
+                                <button class="btn btn-outline-primary w-100">Ver más</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="../static/IMG/novedadZap3.png" class="card-img-top" alt="Zapatilla">
+                            <div class="card-body">
+                                <h5 class="card-title">Zapatillas Freestyle</h5>
+                                <p class="card-text">S/ 159.00</p>
+                                <button class="btn btn-outline-primary w-100">Ver más</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <nav aria-label="Page navigation example" class="mt-4  d-flex justify-content-center align-items-center">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true"><<</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true"><</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">></span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">>></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
             </div>
         </div>
     </div>
@@ -152,7 +257,7 @@
         const precio = document.getElementById("precio");
         const precioValor = document.getElementById("precio-valor");
         precio.addEventListener("input", () => {
-            precioValor.textContent = `$${precio.value}`;
+            precioValor.textContent = `S/${precio.value}`;
         });
     </script>
 </body>
