@@ -1,7 +1,10 @@
 /* Estilos solo para la sección .redes-sociales */
+.container {
+    background-color: #fcf6d2;
+}
 .redes-sociales {
     padding: 40px 0;
-    background-color: #c6c39a;
+    background-color: white;
 }
 
 .redes-sociales .row {
