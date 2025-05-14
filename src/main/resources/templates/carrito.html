@@ -61,8 +61,90 @@
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- Scripts de carrito -->
-  <script src="productos.js"></script>
-  <script src="carrito.js"></script>
+  <!-- Lógica del carrito -->
+  <script>
+    const productosEnCarrito = [
+      {
+        id: 1,
+        nombre: "Nike Revolución 7",
+        cantidad: 1,
+        precio: 220.00,
+        imagen: "assets/novedadZap1.png"
+      },
+      {
+        id: 2,
+        nombre: "Chimpunes Predator",
+        cantidad: 2,
+        precio: 180.00,
+        imagen: "assets/novedadZap2.png"
+      },
+      {
+        id: 3,
+        nombre: "Zapatillas Freestyle",
+        cantidad: 1,
+        precio: 150.00,
+        imagen: "assets/novedadZap3.png"
+      }
+    ];
+
+    function cargarProductos() {
+      const contenedor = document.getElementById("carrito-productos");
+      contenedor.innerHTML = "";
+
+      productosEnCarrito.forEach(producto => {
+        const total = producto.precio * producto.cantidad;
+
+        const div = document.createElement("div");
+        div.className = "col-md-4";
+
+        div.innerHTML = `
+          <div class="card h-100">
+            <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title">${producto.nombre}</h5>
+              <p class="card-text">Cantidad: ${producto.cantidad}</p>
+              <p class="card-text">Precio unitario: S/ ${producto.precio.toFixed(2)}</p>
+              <p class="card-text fw-bold text-info">Total: S/ ${total.toFixed(2)}</p>
+              <button class="btn btn-danger mt-2" onclick="eliminarProducto(${producto.id})">Eliminar</button>
+            </div>
+          </div>
+        `;
+
+        contenedor.appendChild(div);
+      });
+
+      actualizarSubtotal();
+    }
+
+    function actualizarSubtotal() {
+      const subtotal = productosEnCarrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
+      document.getElementById("subtotal").textContent = `S/ ${subtotal.toFixed(2)}`;
+    }
+
+    function eliminarProducto(id) {
+      const index = productosEnCarrito.findIndex(prod => prod.id === id);
+      if (index !== -1) {
+        productosEnCarrito.splice(index, 1);
+        cargarProductos();
+        Swal.fire("Producto eliminado", "", "success");
+      }
+    }
+
+    function vaciarCarrito() {
+      productosEnCarrito.length = 0;
+      cargarProductos();
+      Swal.fire("Carrito vaciado", "", "info");
+    }
+
+    function procederCompra() {
+      if (productosEnCarrito.length === 0) {
+        Swal.fire("Tu carrito está vacío", "Agrega productos para continuar", "warning");
+        return;
+      }
+      Swal.fire("¡Gracias por tu compra!", "Recibirás un correo de confirmación", "success");
+    }
+
+    document.addEventListener("DOMContentLoaded", cargarProductos);
+  </script>
 </body>
 </html>
