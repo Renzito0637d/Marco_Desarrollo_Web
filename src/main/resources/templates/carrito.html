@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito de Compras - Urban Feet</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css" />
+
+  <!-- SweetAlert2 -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css" rel="stylesheet" />
+
+  <!-- Tu CSS personalizado -->
+  <link rel="stylesheet" href="carrito.css" />
+</head>
+<body>
+
+  <!-- Navbar Bootstrap -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Urban Feet</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
+          <li class="nav-item"><a class="nav-link active" href="carrito.html">Carrito</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main class="container my-5 p-4 bg-white rounded shadow">
+    <h1 class="text-center mb-4">Tu Carrito</h1>
+
+    <!-- Productos del carrito -->
+    <div id="carrito-productos" class="row gy-4 justify-content-start">
+      <!-- Los productos del carrito se insertarán aquí dinámicamente -->
+    </div>
+
+    <!-- Resumen -->
+    <div class="resumen-carrito bg-light p-4 mt-5 rounded shadow-sm">
+      <h2 class="mb-3">Resumen de Compra</h2>
+      <p class="mb-2">Subtotal: <span id="subtotal" class="fw-bold text-info">S/ 0.00</span></p>
+      <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+        <button id="vaciar-carrito" class="btn btn-warning" onclick="vaciarCarrito()">Vaciar Carrito</button>
+        <button id="proceder-compra" class="btn btn-success" onclick="procederCompra()">Proceder con la Compra</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="./js/bootstrap.bundle.min.js"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Scripts de carrito -->
+  <script src="productos.js"></script>
+  <script src="carrito.js"></script>
+</body>
+</html>
