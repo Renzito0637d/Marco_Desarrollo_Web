@@ -124,7 +124,7 @@ body {
     flex-direction: column; /* Asegura que el contenido se coloque en una columna */
     justify-content: center; /* Centra verticalmente el contenido */
     align-items: center; /* Centra horizontalmente el contenido */
-    background-color: #692ef3;
+    background-color: #05e6c8;
     border-radius: 50px; /* Ajusta el radio de borde según sea necesario */
     color: white; /* Ajusta el color del texto según sea necesario */
     padding: 20px; /* Ajusta el relleno según sea necesario */
@@ -171,7 +171,7 @@ body {
 }
 
 .containerr button{
-    background-color: #512da8;
+    background-color: rgb(172, 171, 171);
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -298,9 +298,9 @@ body {
 }
 
 .toggle{
-    background-color: #512da8;
+    background-color: #05e6c8;
     height: 100%;
-    background: linear-gradient(to right, #5c6bc0, #512da8);
+    background: #05e6c8;
     color: #fff;
     position: relative;
     left: -100%;
