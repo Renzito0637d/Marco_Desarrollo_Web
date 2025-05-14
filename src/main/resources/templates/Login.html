@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="containerr" id="containerr">
+
+        <!--Formulario de Registro-->
+        <div class="form-container sign-up">
+            <form method="post" action="registro.php">
+                <h1>Crea tu cuenta</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+                <select name="TipoDocumento" class="input-estilizado" required>
+                    <option value="" disabled selected>Seleccionar tipo de documento</option>
+                    <option value="DNI">DNI</option>
+                    <option value="Carnet de Extranjeria">Carnet de Extranjería</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                </select>
+                <input type="text" name="DocumentoIdentidad" placeholder="Número de documento" required>
+                <input type="text" placeholder="Nombre" name="Nombre" required>
+                <input type="text" placeholder="Apellido" name="Apellido" required>
+                <input type="email" placeholder="Correo" name="Email" required>                
+                <input type="password" placeholder="Contraseña" name="Contrasena" required>
+                <button type="submit" name="registro">Registrarse</button>
+            </form>
+        </div>
+
+        <!-- Formulario de Inicio de Sesión -->
+        <div class="form-container sign-in">
+            <form method="post" action="login.php">
+                <h1>FootLoose</h1>
+                <h2>Iniciar Sesión</h2>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+                <label>Correo electrónico</label>
+                <input type="Email" class="form-control" id="floatingEmail" name="Correo" placeholder="nombre@ejemplo.com">
+                <label>Contraseña</label>
+                <input type="password" class="form-control" id="floatingPassword" name="Contrasena" placeholder="Ingrese su contraseña" autocomplete="off">
+                <input type="hidden" name="formulario" value="login">
+                <button type="submit" class="btn btn-outline-primary">Continuar</button>
+            </form>
+            <!-- Enlace para ir a la página de Registro -->
+            <p>¿No tienes cuenta? <a href="login.html#register">¡Regístrate aquí!</a></p>
+        </div>
+
+        <!-- Panel de cambio entre Registro e Inicio de Sesión -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>¿Ya tienes cuenta?</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hola, FootLoover!</h1>
+                    <p>¿Aún no tienes cuenta?<br>¡Regístrate ahora mismo!</p>
+                    <button class="hidden" id="register">Unete Aquí</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/JS/login.js"></script>
+</body>
+</html>
