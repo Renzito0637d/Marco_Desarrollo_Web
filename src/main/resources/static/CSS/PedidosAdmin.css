@@ -1,0 +1,21 @@
+body {
+  background-color: #f8f9fa;
+}
+
+h3 {
+  margin-bottom: 20px;
+  color: black;
+  text-align: center;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.badge {
+  font-size: 0.9rem;
+}
+
+.container {
+
+}

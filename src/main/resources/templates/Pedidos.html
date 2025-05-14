@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/CSS/PedidosAdmin.css">
+    <script src="../static/JS/PedidosAdmin.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Panel de Administración</a>
+
+        <!-- Botón para desplegar menú en pantallas pequeñas -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin" aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Opciones del menú -->
+        <div class="collapse navbar-collapse" id="navbarAdmin">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <a class="nav-link active" href="Pedidos.html">Pedidos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Productos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Clientes</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Reportes</a>
+            </li>
+        </ul>
+
+        <!-- Botón de cerrar sesión -->
+        <button class="btn btn-outline-light" onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+    </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-4">
+        <h3>Gestión de Pedidos</h3>
+
+        <!-- Filtro -->
+        <div class="mb-3">
+            <label for="filtroEstado" class="form-label">Filtrar por estado:</label>
+            <select id="filtroEstado" class="form-select" onchange="filtrarPedidos()">
+                <option value="todos">Todos</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="en camino">En camino</option>
+                <option value="entregado">Entregado</option>
+            </select>
+        </div>
+
+        <!-- Tabla de pedidos -->
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Productos</th>
+                    <th>Fecha</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                    <th>Comprobante</th>
+                </tr>
+            </thead>
+            <tbody id="tablaPedidos">
+                <tr data-estado="pendiente">
+                    <td>#001</td>
+                    <td>Juan Pérez</td>
+                    <td>Nike C1TY.</td>
+                    <td>03/05/2025</td>
+                    <td>S/ 469.90</td>
+                    <td><span class="badge bg-warning text-dark">Pendiente</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="cambiarEstado(this, 'en camino')">Marcar en
+                            camino</button>
+                    </td>
+                    <th>
+                        <a href="https://www.holded.com/wp-content/uploads/2019/11/plantilla-recibo-02-1.pdf" target="_blank">
+                            <button class="btn btn-sm btn-primary"> 📄 PDF </button>
+                        </a>
+                    </th>
+                </tr>
+                <tr data-estado="en camino">
+                    <td>#002</td>
+                    <td>Ana Torres</td>
+                    <td>Zapatillas Samba 62</td>
+                    <td>01/02/2025</td>
+                    <td>S/ 629.00</td>
+                    <td><span class="badge bg-info text-dark">En camino</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-success" onclick="cambiarEstado(this, 'entregado')">Marcar
+                            entregado</button>
+                    </td>
+                                        <th>
+                        <a href="https://www.holded.com/wp-content/uploads/2019/11/plantilla-recibo-02-1.pdf" target="_blank">
+                            <button class="btn btn-sm btn-primary"> 📄 PDF </button>
+                        </a>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
