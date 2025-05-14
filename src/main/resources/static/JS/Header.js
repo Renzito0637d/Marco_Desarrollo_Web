@@ -14,12 +14,12 @@ function createHeader() {
           </a>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Catalogo</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Nosotros</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Contactanos</a></li>
+            <li><a href="../templates/Inicio.html" class="nav-link px-2 text-secondary">Inicio</a></li>
+            <li><a href="../templates/Catalogo.html" class="nav-link px-2 text-white">Catalogo</a></li>
+            <li><a href="../templates/MyV.html" class="nav-link px-2 text-white">Nosotros</a></li>
+            <li><a href="../templates/Reclamos.html" class="nav-link px-2 text-white">Contactanos</a></li>
             <li><a href="../templates/Redes.html" class="nav-link px-2 text-white">Redes</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Mis pedidos</a></li>
+            <li><a href="../templates/MisPedidos.html" class="nav-link px-2 text-white">Mis pedidos</a></li>
           </ul>
 
             <div class="text-end">

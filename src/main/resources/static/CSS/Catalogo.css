@@ -1,0 +1,143 @@
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 1300px;
+}
+
+.card {
+    border-radius: 1rem;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.filters {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.form-check {
+    padding-bottom: 10px;
+}
+
+.container-fluid {
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+.col-md-9 {
+    padding-right: 0;
+}
+
+.btn-primary,
+.btn-outline-primary {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
+}
+
+.filters {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.btn-primary,
+.btn-outline-primary {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
+}
+
+.form-select,
+.form-check-input {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+}
+
+.form-select:focus,
+.form-check-input:focus,
+.form-range:focus {
+    border-color: #000000;
+}
+
+.form-check-label {
+    color: #000000;
+}
+
+.form-check-input:checked {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.form-check-input:checked {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: #000000;
+}
+
+.form-range::-moz-range-thumb {
+    background-color: #000000;
+}
+
+.form-range::-ms-thumb {
+    background-color: #000000;
+}
+
+.form-check-label {
+    color: #000000;
+}
+
+.form-select:focus {
+    border-color: #000000;
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.form-select option {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.card-img-top{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    mask-image: linear-gradient(
+    white 80%,
+    transparent
+    );
+}
