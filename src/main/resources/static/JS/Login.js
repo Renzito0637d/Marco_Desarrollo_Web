@@ -23,7 +23,7 @@ for (let i = 0; i < botones.length; i++) {
 
 
  // Función para cerrar la alerta
- function closeAlert() {
+    function closeAlert() {
     document.querySelector('.dark-overlay').style.display = 'none';
 }
 
