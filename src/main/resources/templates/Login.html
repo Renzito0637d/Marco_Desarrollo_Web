@@ -12,21 +12,15 @@
 
         <!--Formulario de Registro-->
         <div class="form-container sign-up">
-            <form method="post" action="registro.php">
+            <form>
                 <h1>Crea tu cuenta</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
-                <select name="TipoDocumento" class="input-estilizado" required>
-                    <option value="" disabled selected>Seleccionar tipo de documento</option>
-                    <option value="DNI">DNI</option>
-                    <option value="Carnet de Extranjeria">Carnet de Extranjería</option>
-                    <option value="Pasaporte">Pasaporte</option>
-                </select>
-                <input type="text" name="DocumentoIdentidad" placeholder="Número de documento" required>
                 <input type="text" placeholder="Nombre" name="Nombre" required>
                 <input type="text" placeholder="Apellido" name="Apellido" required>
+                <input type="number" placeholder="Telefono" name="Telefono" required>
                 <input type="email" placeholder="Correo" name="Email" required>                
                 <input type="password" placeholder="Contraseña" name="Contrasena" required>
                 <button type="submit" name="registro">Registrarse</button>
@@ -35,7 +29,7 @@
 
         <!-- Formulario de Inicio de Sesión -->
         <div class="form-container sign-in">
-            <form method="post" action="login.php">
+            <form>
                 <img src="../static/IMG/logo.png" alt="Logo" class="logo" style="width: 230px;">
                 <h2>Iniciar Sesión</h2>
                 <div class="social-icons">
