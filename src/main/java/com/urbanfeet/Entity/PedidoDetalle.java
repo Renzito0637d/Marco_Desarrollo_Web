@@ -28,5 +28,5 @@ public class PedidoDetalle {
     private Producto producto;
 
     private Integer cantidad;
-    private Double precioUnitario;
+    private Double precioTotal;
 }
