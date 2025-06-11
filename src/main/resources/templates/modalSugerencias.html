@@ -1,0 +1,32 @@
+<!-- ✅ modalSugerencia.html: SOLO el modal -->
+<div class="modal fade" id="modalSugerencia" tabindex="-1" aria-labelledby="modalSugerenciaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formSugerencia" novalidate>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSugerenciaLabel">Déjanos tu sugerencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nombreS" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" id="nombreS" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="correoS" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="correoS" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="sugerencia" class="form-label">Tu sugerencia</label>
+                        <textarea class="form-control" id="sugerencia" rows="4" maxlength="200"
+                            placeholder="Máximo 200 caracteres" required></textarea>
+                        <small id="contador" class="text-muted">0 / 200 caracteres</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary w-100">Enviar sugerencia</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
