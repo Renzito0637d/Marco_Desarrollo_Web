@@ -1,0 +1,36 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+textarea {
+    resize: none;
+}
+
+.card,
+.modal-content {
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+#contador {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.875rem;
+    text-align: right;
+}
+
+.btn-primary {
+    background-color: #3c8dbc;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #337ab7;
+}

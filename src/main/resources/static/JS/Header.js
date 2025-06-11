@@ -17,7 +17,7 @@ function createHeader() {
             <li><a href="../templates/Inicio.html" class="nav-link px-2 text-secondary">Inicio</a></li>
             <li><a href="../templates/Catalogo.html" class="nav-link px-2 text-white">Catalogo</a></li>
             <li><a href="../templates/MyV.html" class="nav-link px-2 text-white">Nosotros</a></li>
-            <li><a href="../templates/Reclamos.html" class="nav-link px-2 text-white">Contactanos</a></li>
+            <li><a href="../templates/contacto.html" class="nav-link px-2 text-white">Contactanos</a></li>
             <li><a href="../templates/Redes.html" class="nav-link px-2 text-white">Redes</a></li>
             <li><a href="../templates/MisPedidos.html" class="nav-link px-2 text-white">Mis pedidos</a></li>
           </ul>

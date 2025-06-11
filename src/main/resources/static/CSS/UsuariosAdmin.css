@@ -1,0 +1,141 @@
+/* General */
+body {
+    background: linear-gradient(135deg, #f0f0f3, #ffffff);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* Título principal */
+h4 {
+    color: #111;
+    font-weight: 700;
+}
+
+/* Botones */
+.btn {
+    border-radius: 12px;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-dark {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+}
+
+.btn-dark:hover {
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    transform: scale(1.05);
+}
+
+.btn-outline-secondary {
+    background-color: white;
+    color: #555;
+    border: 2px solid transparent;
+}
+
+.btn-outline-secondary:hover {
+    border-color: #6c757d;
+    color: #212529;
+    background-color: #f0f0f0;
+}
+
+.btn-outline-primary {
+    background-color: white;
+    color: #0d6efd;
+    border: 2px solid transparent;
+}
+
+.btn-outline-primary:hover {
+    border-color: #0d6efd;
+    background-color: #e7f0ff;
+    color: #0d6efd;
+}
+
+.btn-outline-danger {
+    background-color: white;
+    color: #dc3545;
+    border: 2px solid transparent;
+}
+
+.btn-outline-danger:hover {
+    border-color: #dc3545;
+    background-color: #ffe6e9;
+    color: #dc3545;
+}
+
+/* Tabla */
+.table {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.table th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    font-size: 14px;
+    color: #444;
+}
+
+.table td {
+    font-size: 14px;
+    vertical-align: middle;
+    color: #555;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background: linear-gradient(to right, #343a40, #212529);
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.modal-body label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Inputs */
+input.form-control,
+select.form-select {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+input.form-control:focus,
+select.form-select:focus {
+    border-color: #ff4b2b;
+    box-shadow: 0 0 5px rgba(255, 75, 43, 0.4);
+    outline: none;
+}
+
+/* Footer del modal */
+.modal-footer .btn {
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 8px 16px;
+}
+
+/* Responsive para botones */
+@media (max-width: 768px) {
+    .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

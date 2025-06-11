@@ -10,6 +10,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../../static/JS/HeaderAdmin.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../static/CSS/Inicio.css">
+    <link rel="stylesheet" href="../../static/CSS/AlmacenAdmin.css">
+    <script src="../../static/JS/AlmacenAdmin.js"></script>
 </head>
 
 <body>
@@ -23,9 +25,9 @@
             <div class="btn-group">
                 <button class="btn btn-dark" data-bs-toggle="modal"
                     data-bs-target="#modalRegistrarAlmacen">Registrar</button>
-                <button class="btn btn-outline-secondary">Consultar</button>
-                <button class="btn btn-outline-primary">Actualizar</button>
-                <button class="btn btn-outline-danger">Eliminar</button>
+                <button class="btn btn-outline-secondary" id="btnConsultar">Consultar</button>
+                <button class="btn btn-outline-primary" id="btnActualizar">Actualizar</button>
+                <button class="btn btn-outline-danger" id="btnEliminar">Eliminar</button>
             </div>
         </div>
 
@@ -123,7 +125,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-dark">Guardar</button>
+                    <button type="button" class="btn btn-dark" id="btnGuardar">Guardar</button>
                 </div>
             </div>
         </div>

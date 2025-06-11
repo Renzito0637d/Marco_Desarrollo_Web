@@ -1,21 +1,180 @@
-body {
-  background-color: #f8f9fa;
+/* PedidosAdmin.css */
+
+/* General */
+body.admin-body {
+    background: linear-gradient(135deg, #f0f0f3, #ffffff);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
 }
 
-h3 {
-  margin-bottom: 20px;
-  color: black;
-  text-align: center;
+/* Contenedor principal */
+.pedidos-container {
+    max-width: 960px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.table th, .table td {
-  vertical-align: middle;
+/* Título */
+.titulo-seccion {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #111;
 }
 
-.badge {
-  font-size: 0.9rem;
+/* Accordion */
+.accordion-item {
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    border: none;
 }
 
-.container {
-
+.accordion-button {
+    font-weight: 600;
+    color: #333;
+    background: #f8f9fa;
+    padding: 1rem 1.25rem;
+    border: none;
+    border-radius: 20px 20px 0 0;
+    transition: background 0.3s ease;
 }
+
+.accordion-button:not(.collapsed) {
+    background-color: #e0e0e0;
+}
+
+.accordion-body {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 0 0 20px 20px;
+}
+
+/* Botones */
+.btn {
+    border-radius: 12px;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+/* Guardar estado */
+.btn-success {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    transform: scale(1.05);
+}
+
+/* Botón eliminar */
+.btn-outline-danger {
+    background-color: white;
+    border: 2px solid transparent;
+    color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    border-color: #dc3545;
+    background-color: #ffe6e9;
+}
+
+/* Botón editar */
+.btn-primary {
+    background: #0d6efd;
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0056d2;
+}
+
+/* Botón cancelar */
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Sección artículos y detalles */
+h6.fw-bold {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+/* Lista de artículos y detalles */
+.list-group-item {
+    background-color: #f9f9f9;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+}
+
+/* Artículos */
+.articulo-nombre {
+    font-weight: 500;
+    color: #333;
+}
+
+.cantidad-texto {
+    margin-right: 0.5rem;
+}
+
+input.form-control-sm {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 80px;
+}
+
+input.form-control-sm:focus {
+    border-color: #ff4b2b;
+    box-shadow: 0 0 5px rgba(255, 75, 43, 0.3);
+    outline: none;
+}
+
+/* Inputs generales */
+input.form-control,
+select.form-select {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+input.form-control:focus,
+select.form-select:focus {
+    border-color: #ff4b2b;
+    box-shadow: 0 0 5px rgba(255, 75, 43, 0.4);
+    outline: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pedidos-container {
+        padding: 1.5rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .accordion-button {
+        font-size: 0.95rem;
+    }
+}
+
