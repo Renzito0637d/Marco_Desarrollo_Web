@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.urbanfeet.Entity.Direccion;
 import com.urbanfeet.Entity.Rol;
@@ -19,18 +20,23 @@ public class UsuarioController {
     @GetMapping("/registro")
     public String newUsuario(Model model){
         Usuario usuario = new Usuario();
-        Direccion direccion = new Direccion();
+        usuario.setDireccion(new Direccion());
         model.addAttribute("usuario", usuario);
-        model.addAttribute("direccion", direccion);
         return "Login";
     }
 
-    @GetMapping("/registrar")
-    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario, @ModelAttribute("direccion") Direccion direccion) {
-        usuario.setDireccion(direccion);
+    @PostMapping("/registrar")
+    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario) {
         usuario.setRol(Rol.USER);
         usuarioService.guardarUsuario(usuario);    
-        return "redirect:/Login";
+        return "redirect:/registro";
     }
-    
+
+    @GetMapping("/inicio")
+    public String sd(Model model){
+        Usuario usuario = new Usuario();
+        usuario.setDireccion(new Direccion());
+        model.addAttribute("usuario", usuario);
+        return "Inicio";
+    }
 }
