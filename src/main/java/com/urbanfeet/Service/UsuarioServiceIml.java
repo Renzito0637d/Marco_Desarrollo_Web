@@ -3,10 +3,12 @@ package com.urbanfeet.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.urbanfeet.DAO.UsuarioDAO;
 import com.urbanfeet.Entity.Usuario;
 
+@Service
 public class UsuarioServiceIml implements UsuarioService {
     @Autowired
     private UsuarioDAO usuarioDAO;
@@ -34,5 +36,10 @@ public class UsuarioServiceIml implements UsuarioService {
     @Override
     public void eliminarUsuario(Integer id) {
         usuarioDAO.eliminarUsuario(id);
+    }
+
+    @Override
+    public Usuario autenticarUsuario(String email, String password) {
+        return usuarioDAO.autenticarUsuario(email, password);
     }
 }

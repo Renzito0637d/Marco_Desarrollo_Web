@@ -2,7 +2,7 @@ function createFooter() {
     // Cargar el CSS principal
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '../static/CSS/Footer.css';
+    link.href = '/CSS/Footer.css';
     document.head.appendChild(link);
 
     const headerHTML = `
@@ -10,7 +10,7 @@ function createFooter() {
         <div class="conte row row-cols-1 row-cols-sm-2 row-cols-md-5">
             <div class="col mb-3"> 
                 <a href="../templates/reclamos.html" >
-                <img src="../static/IMG/libroreclacion.png" alt="Logo UrbanFeet" class="d-inline-block align-text-top libro" style="width:100%">
+                <img src="/IMG/libroreclacion.png" alt="Logo UrbanFeet" class="d-inline-block align-text-top libro" style="width:100%">
                 </a>
             </div>
             <div class="col mb-3">
