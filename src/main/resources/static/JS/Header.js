@@ -2,7 +2,7 @@ function createHeader() {
     // Cargar el CSS principal
   const link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = '../static/CSS/Header.css';
+  link.href = './CSS/Header.css';
   document.head.appendChild(link);
 
     const headerHTML = `
@@ -10,7 +10,7 @@ function createHeader() {
       <div class="contenedor">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <a href="../templates/Inicio.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-            <img src="../static/IMG/logo.png" alt="Logo" class="logo">
+            <img src="/IMG/logo.png" alt="Logo" class="logo">
           </a>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">

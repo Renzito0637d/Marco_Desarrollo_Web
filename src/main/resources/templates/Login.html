@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
-    <link rel="stylesheet" href="../static/CSS/login.css">
+    <link rel="stylesheet" href="/CSS/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
@@ -12,42 +12,45 @@
 
         <!--Formulario de Registro-->
         <div class="form-container sign-up">
-            <form method="post" action="registro.php">
+            <form th:action="@{/registrar}" th:object="${usuario}" method="post">
                 <h1>Crea tu cuenta</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
-                <select name="TipoDocumento" class="input-estilizado" required>
-                    <option value="" disabled selected>Seleccionar tipo de documento</option>
-                    <option value="DNI">DNI</option>
-                    <option value="Carnet de Extranjeria">Carnet de Extranjería</option>
-                    <option value="Pasaporte">Pasaporte</option>
-                </select>
-                <input type="text" name="DocumentoIdentidad" placeholder="Número de documento" required>
-                <input type="text" placeholder="Nombre" name="Nombre" required>
-                <input type="text" placeholder="Apellido" name="Apellido" required>
-                <input type="email" placeholder="Correo" name="Email" required>                
-                <input type="password" placeholder="Contraseña" name="Contrasena" required>
+                <input type="text" placeholder="Nombre" name="nombre" th:field="*{nombre}" required>
+                <input type="text" placeholder="Apellido" name="apellido" th:field="*{apellido}" required>
+                <input type="text" placeholder="Teléfono" name="telefono" th:field="*{telefono}" required>
+                <input type="email" placeholder="Correo" name="email" th:field="*{email}" required>                
+                <input type="password" placeholder="Contraseña" name="password" th:field="*{password}" required>
+                <!-- Campos de dirección -->
+                <input type="text" placeholder="Calle" name="direccion.calle" th:field="*{direccion.calle}" required>
+                <input type="text" placeholder="Distrito" name="direccion.distrito" th:field="*{direccion.distrito}" required>
+                <input type="text" placeholder="Provincia" name="direccion.provincia" th:field="*{direccion.provincia}" required>
+                <input type="text" placeholder="Departamento" name="direccion.departamento" th:field="*{direccion.departamento}" required>
+                <input type="text" placeholder="Referencia" name="direccion.referencia" th:field="*{direccion.referencia}">
                 <button type="submit" name="registro">Registrarse</button>
             </form>
         </div>
 
         <!-- Formulario de Inicio de Sesión -->
         <div class="form-container sign-in">
-            <form method="post" action="login.php">
-                <img src="../static/IMG/logo.png" alt="Logo" class="logo" style="width: 230px;">
+            <form th:action="@{/login}" method="post">
+                <img src="/IMG/logo.png" alt="Logo" class="logo" style="width: 230px;">
                 <h2>Iniciar Sesión</h2>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
                 <label>Correo electrónico</label>
-                <input type="Email" class="form-control" id="floatingEmail" name="Correo" placeholder="nombre@ejemplo.com">
+                <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="nombre@ejemplo.com" required>
                 <label>Contraseña</label>
-                <input type="password" class="form-control" id="floatingPassword" name="Contrasena" placeholder="Ingrese su contraseña" autocomplete="off">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Ingrese su contraseña" autocomplete="off" required>
                 <input type="hidden" name="formulario" value="login">
                 <button type="submit" class="btn btn-outline-primary">Continuar</button>
+                <div th:if="${loginError}" style="color:red;">
+                    <p th:text="${loginError}"></p>
+                </div>
             </form>
             <!-- Enlace para ir a la página de Registro -->
             <p>¿No tienes cuenta? <a href="login.html#register">¡Regístrate aquí!</a></p>
@@ -57,7 +60,7 @@
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
-                    <img src="../static/IMG/logo.png" alt="Logo" class="logo" style="width: 230px;">
+                    <img src="/IMG/logo.png" alt="Logo" class="logo" style="width: 230px;">
                     <h2>¡Bienvenido!</h2>
                     <p>¿Ya tienes cuenta?</p>
                     <button class="hidden" id="login">Inicia sesión</button>
@@ -70,6 +73,6 @@
             </div>
         </div>
     </div>
-    <script src="../static/JS/login.js"></script>
+    <script src="/JS/login.js"></script>
 </body>
 </html>
