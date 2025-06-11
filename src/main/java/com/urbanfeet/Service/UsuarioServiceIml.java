@@ -37,4 +37,9 @@ public class UsuarioServiceIml implements UsuarioService {
     public void eliminarUsuario(Integer id) {
         usuarioDAO.eliminarUsuario(id);
     }
+
+    @Override
+    public Usuario autenticarUsuario(String email, String password) {
+        return usuarioDAO.autenticarUsuario(email, password);
+    }
 }

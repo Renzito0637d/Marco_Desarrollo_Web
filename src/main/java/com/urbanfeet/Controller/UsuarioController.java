@@ -17,7 +17,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/registro")
+    @GetMapping("/IniciaSesion")
     public String newUsuario(Model model){
         Usuario usuario = new Usuario();
         usuario.setDireccion(new Direccion());
@@ -30,6 +30,20 @@ public class UsuarioController {
         usuario.setRol(Rol.USER);
         usuarioService.guardarUsuario(usuario);    
         return "redirect:/registro";
+    }
+
+    @PostMapping("/login")
+    public String loginUsuario(String email, String password, Model model) {
+        Usuario usuario = usuarioService.autenticarUsuario(email, password);
+        if (usuario != null) {
+            // Usuario autenticado correctamente
+            // Puedes guardar el usuario en sesión si lo deseas
+            return "redirect:/inicio";
+        } else {
+            // Error de autenticación
+            model.addAttribute("loginError", "Correo o contraseña incorrectos");
+            return "Login";
+        }
     }
 
     @GetMapping("/inicio")

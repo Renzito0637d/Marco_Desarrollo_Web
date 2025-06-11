@@ -35,7 +35,7 @@
 
         <!-- Formulario de Inicio de Sesión -->
         <div class="form-container sign-in">
-            <form>
+            <form th:action="@{/login}" method="post">
                 <img src="/IMG/logo.png" alt="Logo" class="logo" style="width: 230px;">
                 <h2>Iniciar Sesión</h2>
                 <div class="social-icons">
@@ -43,11 +43,14 @@
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
                 <label>Correo electrónico</label>
-                <input type="Email" class="form-control" id="floatingEmail" name="Correo" placeholder="nombre@ejemplo.com">
+                <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="nombre@ejemplo.com" required>
                 <label>Contraseña</label>
-                <input type="password" class="form-control" id="floatingPassword" name="Contrasena" placeholder="Ingrese su contraseña" autocomplete="off">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Ingrese su contraseña" autocomplete="off" required>
                 <input type="hidden" name="formulario" value="login">
                 <button type="submit" class="btn btn-outline-primary">Continuar</button>
+                <div th:if="${loginError}" style="color:red;">
+                    <p th:text="${loginError}"></p>
+                </div>
             </form>
             <!-- Enlace para ir a la página de Registro -->
             <p>¿No tienes cuenta? <a href="login.html#register">¡Regístrate aquí!</a></p>

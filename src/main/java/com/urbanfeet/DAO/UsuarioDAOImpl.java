@@ -38,4 +38,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         Usuario usuarioObj = usuarioRepository.findById(id).get();
         usuarioRepository.delete(usuarioObj);
     }
+
+    @Override
+    public Usuario autenticarUsuario(String email, String password) {
+        return usuarioRepository.findByEmailAndPassword(email, password);
+    }
 }

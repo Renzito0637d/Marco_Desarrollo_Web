@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <div th:fragment="footer">
+        <footer>
+            <div class="conte row row-cols-1 row-cols-sm-2 row-cols-md-5">
+                <div class="col mb-3">
+                    <a th:href="@{/reclamos}">
+                        <img src="/IMG/libroreclacion.png" alt="Logo UrbanFeet" class="d-inline-block align-text-top libro" style="width:100%">
+                    </a>
+                </div>
+                <div class="col mb-3"></div>
+                <div class="col mb-3">
+                    <h5>Menu</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a th:href="@{/inicio}" class="nav-link p-0 text-body-secondary">Inicio</a></li>
+                        <li class="nav-item mb-2"><a th:href="@{/catalogo}" class="nav-link p-0 text-body-secondary">Catalogo</a></li>
+                        <li class="nav-item mb-2"><a th:href="@{/nosotros}" class="nav-link p-0 text-body-secondary">Nosotros</a></li>
+                        <li class="nav-item mb-2"><a th:href="@{/reclamos}" class="nav-link p-0 text-body-secondary">Contactanos</a></li>
+                        <li class="nav-item mb-2"><a th:href="@{/redes}" class="nav-link p-0 text-body-secondary">Redes</a></li>
+                        <li class="nav-item mb-2"><a th:href="@{/MisPedidos}" class="nav-link p-0 text-body-secondary">Mis pedidos</a></li>
+                    </ul>
+                </div>
+                <div class="col mb-3">
+                    <h5>Redes</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="https://facebook.com" class="nav-link p-0 text-body-secondary" target="_blank">Facebook</a></li>
+                        <li class="nav-item mb-2"><a href="https://instagram.com" class="nav-link p-0 text-body-secondary" target="_blank">Instagram</a></li>
+                        <li class="nav-item mb-2"><a href="https://twitter.com" class="nav-link p-0 text-body-secondary" target="_blank">Twitter</a></li>
+                        <li class="nav-item mb-2"><a href="https://tiktok.com" class="nav-link p-0 text-body-secondary" target="_blank">Tiktok</a></li>
+                    </ul>
+                </div>
+                <div class="col mb-3">
+                    <h5>Catálogo</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a th:href="@{/catalogo?genero=Mujer}" class="nav-link p-0 text-body-secondary">Mujer</a></li>
+                        <li class="nav-item mb-2"><a th:href="@{/catalogo?genero=Hombre}" class="nav-link p-0 text-body-secondary">Hombre</a></li>
+                        <li class="nav-item mb-2"><a th:href="@{/catalogo?genero=Niña}" class="nav-link p-0 text-body-secondary">Niñas</a></li>
+                        <li class="nav-item mb-2"><a th:href="@{/catalogo?genero=Niño}" class="nav-link p-0 text-body-secondary">Niños</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top conte text">
+                Copyright © 2024 - UrbanFeet - Todos los derechos reservados
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
