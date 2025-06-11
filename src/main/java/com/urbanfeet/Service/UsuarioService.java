@@ -1,5 +1,13 @@
 package com.urbanfeet.Service;
 
-public class UsuarioService {
-    
+import java.util.List;
+
+import com.urbanfeet.Entity.Usuario;
+
+public interface UsuarioService {
+    public List<Usuario> listarUsuarios();
+    public Usuario obtenerUsuarioPorId(Integer id);
+    public void guardarUsuario(Usuario usuario);
+    public void actualizarUsuario(Usuario usuario);
+    public void eliminarUsuario(Integer id);
 }

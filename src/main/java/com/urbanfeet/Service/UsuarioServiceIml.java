@@ -1,39 +1,38 @@
-package com.urbanfeet.DAO;
+package com.urbanfeet.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.urbanfeet.DAO.UsuarioDAO;
 import com.urbanfeet.Entity.Usuario;
-import com.urbanfeet.Repository.UsuarioRepository;
 
-public class UsuarioDAOImpl implements UsuarioDAO {
+public class UsuarioServiceIml implements UsuarioService {
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioDAO usuarioDAO;
 
     @Override
     public List<Usuario> listarUsuarios() {
-        return usuarioRepository.findAll();
+        return usuarioDAO.listarUsuarios();
     }
 
     @Override
     public Usuario obtenerUsuarioPorId(Integer id) {
-        return usuarioRepository.findById(id).get();
+        return usuarioDAO.obtenerUsuarioPorId(id);
     }
 
     @Override
     public void guardarUsuario(Usuario usuario) {
-        usuarioRepository.save(usuario);
+        usuarioDAO.guardarUsuario(usuario);
     }
 
     @Override
     public void actualizarUsuario(Usuario usuario) {
-        usuarioRepository.save(usuario);
+        usuarioDAO.actualizarUsuario(usuario);
     }
 
     @Override
     public void eliminarUsuario(Integer id) {
-        Usuario usuarioObj = usuarioRepository.findById(id).get();
-        usuarioRepository.delete(usuarioObj);
+        usuarioDAO.eliminarUsuario(id);
     }
 }
