@@ -40,7 +40,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     @Override
-    public Usuario autenticarUsuario(String email, String password) {
-        return usuarioRepository.findByEmailAndPassword(email, password);
+    public Usuario autenticarUsuario(String email) {
+        return usuarioRepository.findUserByEmail(email).orElse(null);
     }
 }
