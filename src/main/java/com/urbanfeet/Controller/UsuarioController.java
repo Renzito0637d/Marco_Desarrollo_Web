@@ -19,8 +19,10 @@ import com.urbanfeet.Service.UsuarioService;
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
-
     @Autowired
+    private CarritoService carritoService;
+
+    @Autowire
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/IniciaSesion")
@@ -40,6 +42,8 @@ public class UsuarioController {
             .email(usuario.getEmail())
             .telefono(usuario.getTelefono())
             .password(usuario.getPassword())
+            .direccion(usuario.getDireccion())
+            .carrito(usuario.getCarrito())
             .build();
 
         AuthResponse response = usuarioService.guardarUsuario(request);

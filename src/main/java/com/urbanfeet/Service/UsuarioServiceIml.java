@@ -47,7 +47,8 @@ public class UsuarioServiceIml implements UsuarioService {
                 .email(request.getEmail())
                 .telefono(request.getTelefono())                
                 .password(passwordEncoder.encode(request.getPassword()))                
-                .rol(Rol.USER)
+                .direccion(request.getDireccion())
+                .carrito(request.getCarrito())
                 .build();
         usuarioDAO.guardarUsuario(user);
         var jwtToken = jwtService.generateToken(user);

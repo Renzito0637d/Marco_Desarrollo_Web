@@ -1,5 +1,8 @@
 package com.urbanfeet.Entity.Model;
 
+import com.urbanfeet.Entity.Carrito;
+import com.urbanfeet.Entity.Direccion;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +19,6 @@ public class RegisterRequest {
     private String telefono;
     private String password;
     private String dirrecion;
+    private Direccion direccion;
+    private Carrito carrito;
 }
