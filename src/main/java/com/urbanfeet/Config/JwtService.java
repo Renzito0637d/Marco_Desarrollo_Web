@@ -18,10 +18,17 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY= "2e48f8da20ccb954e501ae0c078a76e1b727cd7895f3f514d8da394105117578";
+    private static final String SECRET_KEY = "2e48f8da20ccb954e501ae0c078a76e1b727cd7895f3f514d8da394105117578";
 
-    public String generateToken (UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateToken(UserDetails userDetails) {
+        Map<String, Object> extraClaims = new HashMap<>();
+
+        // Agrega los roles como array de strings
+        extraClaims.put("role", userDetails.getAuthorities().stream()
+                .map(grantedAuthority -> grantedAuthority.getAuthority())
+                .toList());
+
+        return generateToken(extraClaims, userDetails);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
@@ -35,7 +42,7 @@ public class JwtService {
     }
 
     public String getUsername(String token) {
-        return getClaim(token,Claims::getSubject);
+        return getClaim(token, Claims::getSubject);
     }
 
     public <T> T getClaim(String token, Function<Claims, T> claimsResolver) {
@@ -70,5 +77,4 @@ public class JwtService {
         return getClaim(token, Claims::getExpiration);
     }
 
-    
 }

@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.urbanfeet.Config.JwtService;
 import com.urbanfeet.DAO.UsuarioDAO;
-import com.urbanfeet.Entity.Usuario;
 import com.urbanfeet.Entity.Rol;
+import com.urbanfeet.Entity.Usuario;
 import com.urbanfeet.Entity.Model.AuthResponse;
 import com.urbanfeet.Entity.Model.AuthenticationRequest;
 import com.urbanfeet.Entity.Model.RegisterRequest;
+import com.urbanfeet.Entity.Model.RegisterRequestAdmin;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,15 +47,29 @@ public class UsuarioServiceIml implements UsuarioService {
                 .apellido(request.getApellido())
                 .email(request.getEmail())
                 .telefono(request.getTelefono())                
-                .password(passwordEncoder.encode(request.getPassword()))                
-                .direccion(request.getDireccion())
-                .carrito(request.getCarrito())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .rol(Rol.USER)
+                .direccion(request.getDireccion())           
                 .build();
         usuarioDAO.guardarUsuario(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder().token(jwtToken).build();
     }
 
+    @Override
+    public AuthResponse guardarUserAdmin(RegisterRequestAdmin request){
+        var user = Usuario.builder()
+                .nombre(request.getNombre())
+                .apellido(request.getApellido())
+                .email(request.getEmail())
+                .telefono(request.getTelefono())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .rol(Rol.ADMIN)
+                .build();
+        usuarioDAO.guardarUsuario(user);
+        var jwtToken = jwtService.generateToken(user);
+        return AuthResponse.builder().token(jwtToken).build();
+    }
     @Override
     public void actualizarUsuario(Usuario usuario) {
         usuarioDAO.actualizarUsuario(usuario);

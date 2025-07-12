@@ -39,7 +39,7 @@ public class Usuario implements UserDetails{
     private String password;
     private String telefono;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Rol rol;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -51,7 +51,7 @@ public class Usuario implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(rol.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_"+rol.name()));
     }
 
     @Override

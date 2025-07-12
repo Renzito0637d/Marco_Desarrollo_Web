@@ -20,35 +20,53 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfig {
-    
+
     private final JwtFilter jwtFilter;
     private final AuthenticationProvider authenticationProvider;
+
+    private final AuthCustom successHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(publicEndpoints()).permitAll()                
-                .anyRequest().authenticated())
-            .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(publicEndpoints()).permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin(form -> form
+                        .loginPage("/IniciaSesion")
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .successHandler(successHandler)
+                        .failureUrl("/login?error=true"))
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/inicio")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"));
         return httpSecurity.build();
     }
 
     private RequestMatcher publicEndpoints() {
         return new OrRequestMatcher(
-            new AntPathRequestMatcher("/IniciaSesion"),
-            new AntPathRequestMatcher("/registrar"),
-            new AntPathRequestMatcher("/inicio"),
-            new AntPathRequestMatcher("/registro"),
-            new AntPathRequestMatcher("/nosotros"),
-            new AntPathRequestMatcher("/catalogo"),
-            new AntPathRequestMatcher("/reclamos"),
-            new AntPathRequestMatcher("/redes"),
-            new AntPathRequestMatcher("/carrito"),
-            new AntPathRequestMatcher("/miCuenta"),
-            new AntPathRequestMatcher("/api/auth/**")
-        );            
+                new AntPathRequestMatcher("/IniciaSesion"),
+                new AntPathRequestMatcher("/registrar"),
+                new AntPathRequestMatcher("/inicio"),
+                new AntPathRequestMatcher("/registro"),
+                new AntPathRequestMatcher("/registroAdmin"),
+                new AntPathRequestMatcher("/nosotros"),
+                new AntPathRequestMatcher("/catalogo"),
+                new AntPathRequestMatcher("/reclamos"),
+                new AntPathRequestMatcher("/redes"),
+                new AntPathRequestMatcher("/carrito"),
+                new AntPathRequestMatcher("/miCuenta"),
+                new AntPathRequestMatcher("/api/auth/**"),
+                new AntPathRequestMatcher("/CSS/**"),
+                new AntPathRequestMatcher("/IMG/**"),
+                new AntPathRequestMatcher("/JS/**"));
     }
 }

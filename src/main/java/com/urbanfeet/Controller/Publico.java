@@ -1,27 +1,17 @@
 package com.urbanfeet.Controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.urbanfeet.Entity.Direccion;
-import com.urbanfeet.Entity.Usuario;
 
 @Controller
 public class Publico {
     @GetMapping("/nosotros")
-    public String nosotros(Model model){
-        Usuario usuario = new Usuario();
-        usuario.setDireccion(new Direccion());
-        model.addAttribute("usuario", usuario);
+    public String nosotros(){
         return "MyV";
     }
 
     @GetMapping("/catalogo")
-    public String catalogo(Model model){
-        Usuario usuario = new Usuario();
-        usuario.setDireccion(new Direccion());
-        model.addAttribute("usuario", usuario);
+    public String catalogo(){
         return "Catalogo";
     }
 

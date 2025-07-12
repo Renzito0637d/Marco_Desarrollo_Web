@@ -1,29 +1,25 @@
 package com.urbanfeet.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.urbanfeet.Entity.Direccion;
-import com.urbanfeet.Entity.Rol;
 import com.urbanfeet.Entity.Usuario;
 import com.urbanfeet.Entity.Model.RegisterRequest;
+import com.urbanfeet.Entity.Model.RegisterRequestAdmin;
 import com.urbanfeet.Entity.Model.AuthResponse;
 import com.urbanfeet.Service.UsuarioService;
 
 @Controller
 public class UsuarioController {
     @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
-    private CarritoService carritoService;
-
-    @Autowire
-    private PasswordEncoder passwordEncoder;
+    private UsuarioService usuarioService;    
 
     @GetMapping("/IniciaSesion")
     public String newUsuario(Model model){
@@ -42,8 +38,7 @@ public class UsuarioController {
             .email(usuario.getEmail())
             .telefono(usuario.getTelefono())
             .password(usuario.getPassword())
-            .direccion(usuario.getDireccion())
-            .carrito(usuario.getCarrito())
+            .direccion(usuario.getDireccion())            
             .build();
 
         AuthResponse response = usuarioService.guardarUsuario(request);
@@ -52,6 +47,10 @@ public class UsuarioController {
         return "redirect:/registro";
     }
 
+    @PostMapping("/registroAdmin")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequestAdmin request) {        
+        return ResponseEntity.ok(usuarioService.guardarUserAdmin(request));
+    }
     @GetMapping("/inicio")
     public String sd(Model model){
         Usuario usuario = new Usuario();

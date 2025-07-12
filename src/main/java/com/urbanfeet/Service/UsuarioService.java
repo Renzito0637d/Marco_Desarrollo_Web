@@ -10,6 +10,7 @@ public interface UsuarioService {
     public Usuario obtenerUsuarioPorId(Integer id);
     
     public AuthResponse guardarUsuario(RegisterRequest request);
+    public AuthResponse guardarUserAdmin(RegisterRequestAdmin request);
     public AuthResponse autenticarUsuario (AuthenticationRequest request);
 
     public void actualizarUsuario(Usuario usuario);
