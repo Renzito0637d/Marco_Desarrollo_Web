@@ -9,6 +9,15 @@ import com.urbanfeet.Entity.Usuario;
 
 @Controller
 public class Publico {
+    
+    @GetMapping("/")
+    public String inicio(Model model) {
+        Usuario usuario = new Usuario();
+        usuario.setDireccion(new Direccion());
+        model.addAttribute("usuario", usuario);
+        return "Inicio"; // Debe existir /templates/Inicio.html
+    }
+
     @GetMapping("/nosotros")
     public String nosotros(Model model){
         Usuario usuario = new Usuario();
