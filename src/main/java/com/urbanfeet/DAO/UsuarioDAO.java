@@ -10,5 +10,5 @@ public interface UsuarioDAO {
     public void guardarUsuario(Usuario usuario);
     public void actualizarUsuario(Usuario usuario);
     public void eliminarUsuario(Integer id);
-    public Usuario autenticarUsuario(String email, String password);
+    public Usuario autenticarUsuario(String email);
 }
