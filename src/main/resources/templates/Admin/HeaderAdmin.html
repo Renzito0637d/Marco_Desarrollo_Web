@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <div th:fragment="header">
+        <header class="p-3 bg-dark text-white">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Panel de Administración</a>
+
+                    <!-- Botón para desplegar menú en pantallas pequeñas -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin"
+                        aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Opciones del menú -->
+                    <div class="collapse navbar-collapse" id="navbarAdmin">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" th:href="@{/admin/Pedidos}">Pedidos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/admin/Productos}">Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/admin/Usuarios}">Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/admin/Almacen}">Almacen</a>
+                            </li>
+                        </ul>
+
+                        <!-- Botón de cerrar sesión -->
+                        <div th:if="${#authorization.expression('isAuthenticated()')}">
+                            <form th:action="@{/logout}" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+</body>
+
+</html>
