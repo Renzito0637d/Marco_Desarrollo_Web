@@ -1,28 +1,32 @@
 package com.urbanfeet.Controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/admin")
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
-    @GetMapping("admin/Almacen")
-    public String getAlmacen() {
-        return "Admin/Almacen";
+
+    @GetMapping("/pedidos")
+    public String verPedidos() {
+        return "admin/Pedidos"; // templates/admin/Pedidos.html
     }
 
-    @GetMapping("admin/Usuarios")
-    public String getUsuarios() {
-        return "Admin/Usuarios";
+    @GetMapping("/productos")
+    public String verProductos() {
+        return "admin/Productos"; // templates/admin/Productos.html
     }
 
-    @GetMapping("admin/Pedidos")
-    public String getOrdenes() {
-        return "Admin/Pedidos";
+    @GetMapping("/usuarios")
+    public String verUsuarios() {
+        return "admin/Usuarios"; // templates/admin/Usuarios.html
     }
 
-    @GetMapping("admin/Productos")
-    public String getProductos() {
-        return "Admin/Productos";
+    @GetMapping("/almacen")
+    public String verAlmacen() {
+        return "admin/Almacen"; // templates/admin/Almacen.html
     }
-        
 }
