@@ -13,6 +13,7 @@ public interface UsuarioService {
     public AuthResponse guardarUserAdmin(RegisterRequestAdmin request);
     public AuthResponse autenticarUsuario (AuthenticationRequest request);
 
-    public void actualizarUsuario(Usuario usuario);
+    public void actualizarDatosPersonales(String emailActual, Usuario nuevosDatos);
+    public Usuario obtenerPorEmail(String email);
     public void eliminarUsuario(Integer id);
 }

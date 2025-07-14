@@ -70,10 +70,6 @@ public class UsuarioServiceIml implements UsuarioService {
         var jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder().token(jwtToken).build();
     }
-    @Override
-    public void actualizarUsuario(Usuario usuario) {
-        usuarioDAO.actualizarUsuario(usuario);
-    }
 
     @Override
     public void eliminarUsuario(Integer id) {
@@ -91,6 +87,16 @@ public class UsuarioServiceIml implements UsuarioService {
         var user = usuarioDAO.autenticarUsuario(request.getEmail());
         var jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder().token(jwtToken).build();
+    }
+
+    @Override
+    public void actualizarDatosPersonales(String emailActual, Usuario nuevosDatos) {
+        usuarioDAO.actualizarDatosPersonales(emailActual, nuevosDatos);
+    }
+
+    @Override
+    public Usuario obtenerPorEmail(String email) {
+        return usuarioDAO.obtenerPorEmail(email);
     }
 
 }

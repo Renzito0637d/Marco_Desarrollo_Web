@@ -43,4 +43,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public Usuario autenticarUsuario(String email) {
         return usuarioRepository.findUserByEmail(email).orElse(null);
     }
+
+    @Override
+    public void actualizarDatosPersonales(String emailActual, Usuario nuevosDatos) {
+        Usuario usuario = usuarioRepository.findByEmail(emailActual)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuario.setNombre(nuevosDatos.getNombre());
+        usuario.setApellido(nuevosDatos.getApellido());
+        usuario.setEmail(nuevosDatos.getEmail());
+        usuario.setTelefono(nuevosDatos.getTelefono());
+
+        usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public Usuario obtenerPorEmail(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
+
 }

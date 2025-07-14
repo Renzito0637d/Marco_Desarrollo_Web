@@ -16,6 +16,8 @@ import com.urbanfeet.Entity.Model.RegisterRequestAdmin;
 import com.urbanfeet.Entity.Model.AuthResponse;
 import com.urbanfeet.Service.UsuarioService;
 
+import java.security.Principal;
+
 @Controller
 public class UsuarioController {
     @Autowired
@@ -58,4 +60,24 @@ public class UsuarioController {
         model.addAttribute("usuario", usuario);
         return "Inicio";
     }
+
+    @GetMapping("/Cuenta")
+    public String mostrarCuenta(Model model, Principal principal) {
+        Usuario usuario = usuarioService.obtenerPorEmail(principal.getName());
+
+        if (usuario.getDireccion() == null) {
+            usuario.setDireccion(new Direccion());
+        }
+
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("direccion", usuario.getDireccion());
+        return "Cuenta";
+    }
+
+    @PostMapping("/perfil")
+    public String actualizarPerfil(@ModelAttribute("usuario") Usuario usuarioForm, Principal principal) {
+        usuarioService.actualizarDatosPersonales(principal.getName(), usuarioForm);
+        return "redirect:/Cuenta?perfilActualizado";
+    }
+
 }
