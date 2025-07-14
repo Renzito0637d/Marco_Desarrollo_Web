@@ -32,7 +32,7 @@
           <div class="mb-4">
             <label for="marcas" class="form-label">Marcas</label>
             <select class="form-select" id="marcas" name="marcas">
-              <option value="" disabled>-- Seleccione marcas --</option>
+              <option value="" th:selected="${marcas == null or marcas == ''}">Todos</option>
               <option value="Nike" th:selected="${marcas != null and #lists.contains(marcas, 'Nike')}">Nike</option>
               <option value="Adidas" th:selected="${marcas != null and #lists.contains(marcas, 'Adidas')}">Adidas</option>
               <option value="iRun" th:selected="${marcas != null and #lists.contains(marcas, 'iRun')}">I-RUN</option>
