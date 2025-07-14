@@ -19,10 +19,10 @@ public class AdminController {
     public String getOrdenes() {
         return "Admin/Pedidos";
     }
-
+/* 
     @GetMapping("admin/Productos")
     public String getProductos() {
         return "Admin/Productos";
     }
-        
+        */
 }

@@ -20,8 +20,8 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private String marca;
-    private String genero;
-    private String tipo;
+    private String genero = "";
+    private String tipo = "";
     private String colores;
     private Double precio;
     private Integer stock;

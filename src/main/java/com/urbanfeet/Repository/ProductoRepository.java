@@ -1,5 +1,9 @@
 package com.urbanfeet.Repository;
 
-public class ProductoRepository {
-    
+import com.urbanfeet.Entity.Producto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 }
