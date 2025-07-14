@@ -33,7 +33,9 @@ function createHeader() {
         </ul>
 
         <!-- Botón de cerrar sesión -->
-        <a href="../Inicio.html"><button class="btn btn-outline-light" onclick="cerrarSesion()">Cerrar sesión</button></a>
+        <form id="logoutForm" action="/logout" method="post">
+        <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
+            </form>
         </div>
     </div>
     </nav>
