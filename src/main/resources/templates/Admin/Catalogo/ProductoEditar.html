@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Editar producto - ' + ${producto.nombre}">Editar producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="Header :: header"></div>
+
+<div class="container py-4">
+    <h2>Editar producto</h2>
+
+    <!-- Mostrar errores si existen -->
+    <div th:if="${param.error}" class="alert alert-danger">
+        <p th:text="${param.error}"></p>
+    </div>
+
+    <form th:action="@{/admin/catalogo/{id}/editar(id=${producto.id})}"
+          method="post"
+          th:object="${producto}"
+          class="needs-validation"
+          novalidate>
+
+        <!-- Nombre -->
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text"
+                   id="nombre"
+                   th:field="*{nombre}"
+                   class="form-control"
+                   required>
+        </div>
+
+        <!-- Descripción -->
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea id="descripcion"
+                      th:field="*{descripcion}"
+                      class="form-control"
+                      rows="3"
+                      required></textarea>
+        </div>
+
+        <!-- Género -->
+        <div class="mb-3">
+            <label for="genero" class="form-label">Género</label>
+            <select id="genero"
+                    th:field="*{genero}"
+                    class="form-select"
+                    required>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+                <option value="Unisex">Unisex</option>
+            </select>
+        </div>
+
+        <!-- Marca -->
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca</label>
+            <input type="text"
+                   id="marca"
+                   th:field="*{marca}"
+                   class="form-control"
+                   required>
+        </div>
+
+        <!-- Colores -->
+        <div class="mb-3">
+            <label for="colores" class="form-label">Colores (separados por comas)</label>
+            <input type="text"
+                   id="colores"
+                   th:field="*{colores}"
+                   class="form-control"
+                   placeholder="Rojo, Azul, Verde"
+                   required>
+        </div>
+
+        <!-- Tipo -->
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <select id="tipo"
+                    th:field="*{tipo}"
+                    class="form-select"
+                    required>
+                <option value="">Todos</option>
+                <option value="Running">Running</option>
+                <option value="Futbol">Futbol</option>
+                <option value="Training">Training</option>
+                <option value="Outdoor">Outdoor</option>
+                <option value="Sneakers">Sneakers</option>
+                <option value="Lifestyle">Lifestyle</option>
+                <option value="Otros">Otros</option>
+            </select>
+        </div>
+
+        <!-- Precio -->
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number"
+                   id="precio"
+                   step="0.01"
+                   th:field="*{precio}"
+                   class="form-control"
+                   required>
+        </div>
+
+        <!-- Stock -->
+        <div class="mb-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input type="number"
+                   id="stock"
+                   th:field="*{stock}"
+                   class="form-control"
+                   required>
+        </div>
+
+        <!-- URL de la imagen -->
+        <div class="mb-3">
+            <label for="imageUrl" class="form-label">URL de la imagen</label>
+            <input type="url"
+                   id="imageUrl"
+                   th:field="*{imageUrl}"
+                   class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/admin/catalogo}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<div th:replace="Footer :: footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

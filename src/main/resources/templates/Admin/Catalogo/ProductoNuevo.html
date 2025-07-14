@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${producto.id == null ? 'Nuevo producto' : 'Editar producto'}"></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container py-4">
+  <h2 th:text="${producto.id == null ? 'Registrar nuevo producto' : 'Editar producto'}"></h2>
+
+  <!-- Mostrar errores si existen -->
+  <div th:if="${param.error}" class="alert alert-danger">
+    <p th:text="${param.error}"></p>
+  </div>
+
+  <form th:action="@{${producto.id == null ? '/admin/catalogo/nuevo' : '/admin/catalogo/' + producto.id + '/editar'}}"
+        method="post" th:object="${producto}" class="needs-validation" novalidate>
+
+    <!-- Método oculto para simular PUT -->
+    <input type="hidden" name="_method" value="put" th:if="${producto.id != null}"/>
+    <input type="hidden" th:if="*{id != null}" th:field="*{id}"/>
+
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" class="form-control" th:field="*{nombre}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Descripción</label>
+      <textarea class="form-control" th:field="*{descripcion}" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Género</label>
+      <select class="form-control" th:field="*{genero}">
+        <option value="Hombre">Hombre</option>
+        <option value="Mujer">Mujer</option>
+        <option value="Unisex">Unisex</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Marca</label>
+      <select class="form-control" th:field="*{marca}" required>
+        <option value="Adidas">Adidas</option>
+        <option value="Nike">Nike</option>
+        <option value="iRun">iRun</option>
+        <option value="New Balance">New Balance</option>
+        <option value="Puma">Puma</option>
+        <option value="Converse">Converse</option>
+        <option value="Reebok">Reebok</option>
+        <option value="Vans">Vans</option>
+        <option value="Punto Original">Punto Original</option>
+        <option value="New Athletic">New Athletic</option>
+        <option value="Atletix">Atletix</option>
+        <option value="Asics">Asics</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Colores (separados por comas)</label>
+      <input type="text" class="form-control" th:field="*{colores}" placeholder="Rojo, Azul, Verde" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tipo</label>
+      <select class="form-control" th:field="*{tipo}">
+        <option value="Running">Running</option>
+        <option value="Futbol">Fútbol</option>
+        <option value="Training">Training</option>
+        <option value="Outdoor">Outdoor</option>
+        <option value="Sneakers">Sneakers</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Precio</label>
+      <input type="number" step="0.01" class="form-control" th:field="*{precio}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Stock</label>
+      <input type="number" class="form-control" th:field="*{stock}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">URL de la imagen</label>
+      <input type="url" class="form-control" th:field="*{imageUrl}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/admin/catalogo" class="btn btn-secondary">Cancelar</a>
+  </form>
+
+</div>
+</body>
+</html>
