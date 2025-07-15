@@ -55,7 +55,7 @@ public class ProductoDAOImpl implements ProductoDAO {
             params.put("max", precioMax);
         }
         if (soloDisponibles) {
-            jpql.append("AND p.stock > 0 ");
+            jpql.append("AND EXISTS (SELECT 1 FROM ProductoVariacion v WHERE v.producto = p AND v.stock > 0) ");
         }
 
         // Ordenamiento dinámico
