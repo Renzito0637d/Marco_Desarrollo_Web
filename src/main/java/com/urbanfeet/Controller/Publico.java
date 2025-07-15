@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,6 +49,12 @@ public class Publico {
         return "Catalogo";
     }
 
+    @GetMapping("/producto/{id}")
+    public String detalleProducto(@PathVariable Integer id, Model model) {
+        Producto producto = productoService.obtener(id);
+        model.addAttribute("producto", producto);
+        return "producto-detalle"; 
+    }
 
     @GetMapping("/reclamos")
     public String reclamos(){
