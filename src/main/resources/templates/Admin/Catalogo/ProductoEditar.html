@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title th:text="'Editar producto - ' + ${producto.nombre}">Editar producto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/JS/HeaderAdmin.js" type="text/javascript"></script>
+    <script src="/JS/HeaderAdmin.js"></script>
 </head>
 <body>
 <header id="header"></header>
@@ -12,79 +12,34 @@
 <div class="container py-4">
     <h2>Editar producto</h2>
 
-    <!-- Mostrar errores si existen -->
-    <div th:if="${param.error}" class="alert alert-danger">
-        <p th:text="${param.error}"></p>
-    </div>
-
-    <form th:action="@{/admin/catalogo/{id}/editar(id=${producto.id})}"
-          method="post"
-          th:object="${producto}"
-          class="needs-validation"
-          novalidate>
-
-        <!-- Nombre -->
+    <form th:action="@{/admin/catalogo/{id}/editar(id=${producto.id})}" method="post" th:object="${producto}">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text"
-                   id="nombre"
-                   th:field="*{nombre}"
-                   class="form-control"
-                   required>
+            <input type="text" th:field="*{nombre}" class="form-control" required>
         </div>
 
-        <!-- Descripción -->
         <div class="mb-3">
             <label for="descripcion" class="form-label">Descripción</label>
-            <textarea id="descripcion"
-                      th:field="*{descripcion}"
-                      class="form-control"
-                      rows="3"
-                      required></textarea>
+            <textarea th:field="*{descripcion}" class="form-control" rows="3" required></textarea>
         </div>
 
-        <!-- Género -->
         <div class="mb-3">
             <label for="genero" class="form-label">Género</label>
-            <select id="genero"
-                    th:field="*{genero}"
-                    class="form-select"
-                    required>
+            <select th:field="*{genero}" class="form-select" required>
                 <option value="Hombre">Hombre</option>
                 <option value="Mujer">Mujer</option>
                 <option value="Unisex">Unisex</option>
             </select>
         </div>
 
-        <!-- Marca -->
         <div class="mb-3">
             <label for="marca" class="form-label">Marca</label>
-            <input type="text"
-                   id="marca"
-                   th:field="*{marca}"
-                   class="form-control"
-                   required>
+            <input type="text" th:field="*{marca}" class="form-control" required>
         </div>
 
-        <!-- Colores -->
-        <div class="mb-3">
-            <label for="colores" class="form-label">Colores (separados por comas)</label>
-            <input type="text"
-                   id="colores"
-                   th:field="*{colores}"
-                   class="form-control"
-                   placeholder="Rojo, Azul, Verde"
-                   required>
-        </div>
-
-        <!-- Tipo -->
         <div class="mb-3">
             <label for="tipo" class="form-label">Tipo</label>
-            <select id="tipo"
-                    th:field="*{tipo}"
-                    class="form-select"
-                    required>
-                <option value="">Todos</option>
+            <select th:field="*{tipo}" class="form-select" required>
                 <option value="Running">Running</option>
                 <option value="Futbol">Futbol</option>
                 <option value="Training">Training</option>
@@ -95,46 +50,114 @@
             </select>
         </div>
 
-        <!-- Precio -->
-        <div class="mb-3">
-            <label for="precio" class="form-label">Precio</label>
-            <input type="number"
-                   id="precio"
-                   step="0.01"
-                   th:field="*{precio}"
-                   class="form-control"
-                   required>
+        <h4 class="mt-4">Variaciones</h4>
+        <div id="variaciones-container">
+            <div th:each="var, iter : ${producto.variaciones}" th:id="'var-card-' + ${iter.index}">
+                <div class="card mb-2">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <button class="btn btn-link" type="button" data-bs-toggle="collapse"
+                                th:attr="data-bs-target='#collapse__' + ${iter.index}"
+                                th:attrappend="aria-controls='collapse__' + ${iter.index}">
+                            Variación [[${iter.index} + 1]] - Color: [[${var.color}]]
+                        </button>
+                        <!-- Botón eliminar -->
+                        <button type="button"
+                                class="btn btn-sm btn-danger"
+                                th:attr="onclick='eliminarVariacion(' + ${iter.index} + ')'">
+                            Eliminar
+                        </button>
+                    </div>
+                    <div class="collapse" th:id="'collapse__' + ${iter.index}">
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <label class="form-label">Color</label>
+                                <input type="text" th:name="'variaciones[' + ${iter.index} + '].color'"
+                                       th:value="${var.color}" class="form-control" required>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Precio</label>
+                                <input type="number" step="0.01" th:name="'variaciones[' + ${iter.index} + '].precio'"
+                                       th:value="${var.precio}" class="form-control" required>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Stock</label>
+                                <input type="number" th:name="'variaciones[' + ${iter.index} + '].stock'"
+                                       th:value="${var.stock}" class="form-control" required>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">URL Imagen</label>
+                                <input type="text" th:name="'variaciones[' + ${iter.index} + '].imageUrl'"
+                                       th:value="${var.imageUrl}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Stock -->
-        <div class="mb-3">
-            <label for="stock" class="form-label">Stock</label>
-            <input type="number"
-                   id="stock"
-                   th:field="*{stock}"
-                   class="form-control"
-                   required>
-        </div>
+        <!-- Botón para añadir variación -->
+        <button type="button" class="btn btn-outline-primary mt-3" onclick="agregarVariacion()">Añadir Variación</button>
 
-        <!-- URL de la imagen -->
-        <div class="mb-3">
-            <label for="imageUrl" class="form-label">URL de la imagen</label>
-            <input type="url"
-                   id="imageUrl"
-                   th:field="*{imageUrl}"
-                   class="form-control">
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/admin/catalogo}" class="btn btn-secondary">Cancelar</a>
         </div>
-
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a th:href="@{/admin/catalogo}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 
+<!-- Footer -->
 <div th:replace="Footer :: footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/JS/HeaderAdmin.js"></script>
 <script>
     createHeader();
+
+    function agregarVariacion() {
+        const container = document.getElementById('variaciones-container');
+        const index = container.children.length;
+
+        const template = `
+        <div class="card mb-2">
+            <div class="card-header">
+                <button class="btn btn-link" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse__${index}"
+                        aria-expanded="false"
+                        aria-controls="collapse__${index}">
+                    Variación ${index + 1} - Nuevo color
+                </button>
+            </div>
+            <div class="collapse show" id="collapse__${index}">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label class="form-label">Color</label>
+                        <input type="text" name="variaciones[${index}].color" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Precio</label>
+                        <input type="number" step="0.01" name="variaciones[${index}].precio" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Stock</label>
+                        <input type="number" name="variaciones[${index}].stock" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">URL Imagen</label>
+                        <input type="text" name="variaciones[${index}].imageUrl" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>`;
+        container.insertAdjacentHTML('beforeend', template);
+    }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function eliminarVariacion(index) {
+        if (confirm("¿Estás seguro de eliminar esta variación?")) {
+            const card = document.getElementById(`var-card-${index}`);
+            if (card) card.remove();
+        }
+    }
+</script>
 </body>
 </html>
