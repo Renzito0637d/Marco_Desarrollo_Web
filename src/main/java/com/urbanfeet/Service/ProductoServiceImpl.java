@@ -22,34 +22,33 @@ public class ProductoServiceImpl implements ProductoService {
     /*----------- Reglas de negocio y validaciones ----------*/
 
     private void validar(Producto p, boolean esNuevo) {
-        if (p.getPrecio() == null || p.getPrecio() <= 0)
-            throw new IllegalArgumentException("El precio debe ser > 0");
-
-        if (p.getStock() == null || p.getStock() < 0)
-            throw new IllegalArgumentException("El stock no puede ser negativo");
-
         if (p.getNombre() == null || p.getNombre().isBlank())
             throw new IllegalArgumentException("El nombre es obligatorio");
 
-        // Evitar duplicados solo al crear
+        if (p.getVariaciones() == null || p.getVariaciones().isEmpty())
+            throw new IllegalArgumentException("Debe agregar al menos una variación de producto");
+
+        for (var v : p.getVariaciones()) {
+            if (v.getPrecio() == null || v.getPrecio() <= 0)
+                throw new IllegalArgumentException("El precio de una variación debe ser > 0");
+            if (v.getStock() == null || v.getStock() < 0)
+                throw new IllegalArgumentException("El stock no puede ser negativo");
+            if (v.getColor() == null || v.getColor().isBlank())
+                throw new IllegalArgumentException("Cada variación debe tener un color");
+            if (v.getImageUrl() == null || v.getImageUrl().isBlank())
+                throw new IllegalArgumentException("Cada variación debe tener una imagen");
+        }
+
         if (esNuevo) {
             boolean existe = dao.filtrarCatalogo(
-                            null,       // marcas
-                            null,       // genero
-                            null,       // tipo
-                            null,       // color
-                            null,       // precioMin
-                            null,       // precioMax
-                            false,      // soloDisponibles
+                            null, null, null, null, null, null, false,
                             PageRequest.of(0, 1))
-                    .getContent()             // <- lista real
+                    .getContent()
                     .stream()
-                    .anyMatch(prod -> prod.getNombre()
-                            .equalsIgnoreCase(p.getNombre()));
+                    .anyMatch(prod -> prod.getNombre().equalsIgnoreCase(p.getNombre()));
 
             if (existe) {
-                throw new IllegalArgumentException(
-                        "Ya existe un producto con el mismo nombre");
+                throw new IllegalArgumentException("Ya existe un producto con el mismo nombre");
             }
         }
     }
@@ -83,13 +82,22 @@ public class ProductoServiceImpl implements ProductoService {
     @Transactional
     public Producto crear(Producto producto) {
         validar(producto, true);
+
+        // Relación inversa para variaciones
+        producto.getVariaciones().forEach(v -> v.setProducto(producto));
+
         return dao.guardar(producto);
     }
 
     @Override
+    @Transactional
     public Producto actualizar(int id, Producto producto) {
         producto.setId(id);
         validar(producto, false);
+
+        // Relación inversa para variaciones
+        producto.getVariaciones().forEach(v -> v.setProducto(producto));
+
         return dao.guardar(producto);
     }
 
