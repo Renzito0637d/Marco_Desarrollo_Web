@@ -48,7 +48,6 @@
             </select>
           </div>
 
-
           <!-- Género -->
           <div class="mb-4">
             <label for="genero" class="form-label">Género</label>
@@ -56,7 +55,7 @@
               <option value="" th:selected="${genero == null or genero == ''}">Todos</option>
               <option value="Hombre" th:selected="${genero == 'Hombre'}">Hombre</option>
               <option value="Mujer"   th:selected="${genero == 'Mujer'}">Mujer</option>
-              <option value="Unisex"    th:selected="${genero == 'Unisex'}">Unisex</option>
+              <option value="Unisex"  th:selected="${genero == 'Unisex'}">Unisex</option>
             </select>
           </div>
 
@@ -86,10 +85,10 @@
             <label class="form-check-label" for="disponibles">Sólo con stock &gt; 0</label>
           </div>
 
-        <div class="d-grid gap-2 mt-2">
-          <button type="submit" class="btn btn-primary w-100">Buscar</button>
-          <a href="/admin/catalogo" class="btn btn-primary w-100">Limpiar filtros</a>
-        </div>
+          <div class="d-grid gap-2 mt-2">
+            <button type="submit" class="btn btn-primary w-100">Buscar</button>
+            <a href="/admin/catalogo" class="btn btn-primary w-100">Limpiar filtros</a>
+          </div>
         </div>
       </form>
     </aside>
@@ -114,23 +113,30 @@
         <tr th:each="p : ${productos.content}">
           <td th:text="${p.id}">1</td>
           <td>
-            <img th:src="@{${p.imageUrl}}"
+            <img th:if="${p.variaciones != null and !#lists.isEmpty(p.variaciones)}"
+                 th:src="@{${p.variaciones[0].imageUrl}}"
                  alt="img"
                  class="img-fluid"
                  style="max-width:70px">
           </td>
           <td th:text="${p.nombre}">Nombre</td>
           <td th:text="${p.marca}">Marca</td>
-          <!-- Nueva columna Género -->
           <td th:text="${p.genero}">Género</td>
-          <!-- Nueva columna Tipo -->
           <td th:text="${p.tipo}">Tipo</td>
-          <td th:text="${p.precio}" class="text-end">0.00</td>
-          <td th:text="${p.stock}"
-              class="text-center"
-              th:classappend="${p.stock == 0 ? ' text-danger'
-                                    : (p.stock < 10 ? ' text-warning' : '')}">
+
+          <!-- Precio desde la primera variación -->
+          <td class="text-end"
+              th:text="${p.variaciones != null and !#lists.isEmpty(p.variaciones) ? p.variaciones[0].precio : 'N/A'}">
           </td>
+
+          <!-- Stock desde la primera variación -->
+          <td class="text-center"
+              th:text="${p.variaciones != null and !#lists.isEmpty(p.variaciones) ? p.variaciones[0].stock : 'N/A'}"
+              th:classappend="${p.variaciones != null and !#lists.isEmpty(p.variaciones) ?
+                (p.variaciones[0].stock == 0 ? ' text-danger' :
+                 (p.variaciones[0].stock < 10 ? ' text-warning' : '')) : ''}">
+          </td>
+
           <td class="text-center">
             <a class="btn btn-sm btn-outline-primary"
                th:href="@{|/admin/catalogo/${p.id}/editar|}">
@@ -164,9 +170,7 @@
                    precioMin=${precioMin},
                    precioMax=${precioMax},
                    disponibles=${disponibles}
-                 )}">
-              Anterior
-            </a>
+                 )}">Anterior</a>
           </li>
           <li class="page-item"
               th:each="i : ${#numbers.sequence(0, productos.totalPages - 1)}"
@@ -182,8 +186,7 @@
                    precioMin=${precioMin},
                    precioMax=${precioMax},
                    disponibles=${disponibles}
-                 )}">
-            </a>
+                 )}"></a>
           </li>
           <li class="page-item" th:classappend="${productos.last} ? 'disabled'">
             <a class="page-link"
@@ -196,9 +199,7 @@
                    precioMin=${precioMin},
                    precioMax=${precioMax},
                    disponibles=${disponibles}
-                 )}">
-              Siguiente
-            </a>
+                 )}">Siguiente</a>
           </li>
         </ul>
       </nav>
