@@ -93,4 +93,9 @@ public class UsuarioServiceIml implements UsuarioService {
         return AuthResponse.builder().token(jwtToken).build();
     }
 
+    @Override
+    public Usuario buscarPorEmail(String email) {
+        return usuarioDAO.buscarPorEmail(email);
+    }
+
 }

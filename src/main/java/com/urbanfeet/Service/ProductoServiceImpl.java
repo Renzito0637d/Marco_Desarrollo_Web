@@ -2,8 +2,6 @@ package com.urbanfeet.Service;
 
 import com.urbanfeet.DAO.ProductoDAO;
 import com.urbanfeet.Entity.Producto;
-import com.urbanfeet.Service.ProductoService;
-import com.urbanfeet.Repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
