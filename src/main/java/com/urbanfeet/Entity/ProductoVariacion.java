@@ -17,6 +17,7 @@ public class ProductoVariacion {
     private String imageUrl;
     private Double precio;
     private Integer stock;
+    private String talla;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id", nullable = false)
