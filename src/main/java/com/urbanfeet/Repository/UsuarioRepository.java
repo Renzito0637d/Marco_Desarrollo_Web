@@ -12,5 +12,9 @@ import com.urbanfeet.Entity.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {    
     Optional<Usuario> findUserByEmail(String email);
+
+    Optional<Usuario> findByEmail(String email);
+
     List<Usuario> findByRol(Rol rol);
+
 }

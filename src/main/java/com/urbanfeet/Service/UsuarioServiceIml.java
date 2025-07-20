@@ -98,4 +98,14 @@ public class UsuarioServiceIml implements UsuarioService {
         return AuthResponse.builder().token(jwtToken).build();
     }
 
+    @Override
+    public void actualizarDatosPersonales(String emailActual, Usuario nuevosDatos) {
+        usuarioDAO.actualizarDatosPersonales(emailActual, nuevosDatos);
+    }
+
+    @Override
+    public Usuario obtenerPorEmail(String email) {
+        return usuarioDAO.obtenerPorEmail(email);
+    }
+
 }
