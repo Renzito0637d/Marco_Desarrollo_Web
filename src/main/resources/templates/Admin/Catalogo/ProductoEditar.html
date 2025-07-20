@@ -85,6 +85,11 @@
                                        th:value="${var.stock}" class="form-control" required>
                             </div>
                             <div class="mb-2">
+                                <label class="form-label">Talla</label>
+                                <input type="text" th:name="'variaciones[' + ${iter.index} + '].talla'"
+                                       th:value="${var.talla}" class="form-control" required>
+                            </div>
+                            <div class="mb-2">
                                 <label class="form-label">URL Imagen</label>
                                 <input type="text" th:name="'variaciones[' + ${iter.index} + '].imageUrl'"
                                        th:value="${var.imageUrl}" class="form-control">
@@ -140,6 +145,10 @@
                     <div class="mb-2">
                         <label class="form-label">Stock</label>
                         <input type="number" name="variaciones[${index}].stock" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Talla</label>
+                        <input type="text" name="variaciones[${index}].talla" class="form-control" required>
                     </div>
                     <div class="mb-2">
                         <label class="form-label">URL Imagen</label>
