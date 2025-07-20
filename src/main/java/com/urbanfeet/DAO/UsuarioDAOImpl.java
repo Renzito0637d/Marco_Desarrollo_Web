@@ -43,4 +43,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public Usuario autenticarUsuario(String email) {
         return usuarioRepository.findUserByEmail(email).orElse(null);
     }
+
+    @Override
+    public Usuario buscarPorEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
 }
