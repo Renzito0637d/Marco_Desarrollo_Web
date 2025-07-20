@@ -15,4 +15,5 @@ public interface UsuarioService {
 
     public void actualizarUsuario(Usuario usuario);
     public void eliminarUsuario(Integer id);
+    public Usuario buscarPorEmail(String email);
 }
