@@ -39,12 +39,13 @@ public class CarritoController {
         Usuario usuario = usuarioService.buscarPorEmail(principal.getName());
 
         Carrito carrito = carritoService.buscarPorUsuario(usuario)
-                .orElseGet(() -> {
-                    Carrito nuevoCarrito = new Carrito();
-                    nuevoCarrito.setUsuario(usuario);
-                    carritoService.guardarCarrito(nuevoCarrito);
-                    return nuevoCarrito;
-                });
+        .orElseGet(() -> {
+            Carrito nuevoCarrito = new Carrito();
+            nuevoCarrito.setUsuario(usuario);
+            carritoService.guardarCarrito(nuevoCarrito);            
+            return carritoService.buscarPorUsuario(usuario).orElse(nuevoCarrito);
+        });
+
 
         Optional<ProductoVariacion> variacionOpt = productoVariacionService
                 .buscarPorProductoYColor(productoId, color);

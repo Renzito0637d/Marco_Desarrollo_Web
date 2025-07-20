@@ -1,5 +1,6 @@
 package com.urbanfeet.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -29,5 +30,5 @@ public class Carrito {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CarritoProductos> productos;
+    private List<CarritoProductos> productos=new ArrayList<>();;
 }
