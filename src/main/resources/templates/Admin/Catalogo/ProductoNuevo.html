@@ -11,18 +11,13 @@
 <div class="container py-4">
   <h2 th:text="${producto.id == null ? 'Registrar nuevo producto' : 'Editar producto'}"></h2>
 
-  <!-- Mostrar errores si existen -->
-  <div th:if="${param.error}" class="alert alert-danger">
-    <p th:text="${param.error}"></p>
-  </div>
-
   <form th:action="@{${producto.id == null ? '/admin/catalogo/nuevo' : '/admin/catalogo/' + producto.id + '/editar'}}"
         method="post" th:object="${producto}" class="needs-validation" novalidate>
 
-    <!-- Método oculto para simular PUT -->
     <input type="hidden" name="_method" value="put" th:if="${producto.id != null}"/>
     <input type="hidden" th:if="*{id != null}" th:field="*{id}"/>
 
+    <!-- Datos del producto -->
     <div class="mb-3">
       <label class="form-label">Nombre</label>
       <input type="text" class="form-control" th:field="*{nombre}" required>
@@ -57,10 +52,6 @@
       </select>
     </div>
     <div class="mb-3">
-      <label class="form-label">Colores (separados por comas)</label>
-      <input type="text" class="form-control" th:field="*{colores}" placeholder="Rojo, Azul, Verde" required>
-    </div>
-    <div class="mb-3">
       <label class="form-label">Tipo</label>
       <select class="form-control" th:field="*{tipo}">
         <option value="Running">Running</option>
@@ -70,26 +61,82 @@
         <option value="Sneakers">Sneakers</option>
       </select>
     </div>
-    <div class="mb-3">
-      <label class="form-label">Precio</label>
-      <input type="number" step="0.01" class="form-control" th:field="*{precio}" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Stock</label>
-      <input type="number" class="form-control" th:field="*{stock}" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">URL de la imagen</label>
-      <input type="url" class="form-control" th:field="*{imageUrl}">
+
+    <!-- Variaciones -->
+    <h4 class="mt-4">Variaciones</h4>
+    <div id="variaciones-container">
+      <!-- Este bloque se repetirá si estás editando -->
+      <div th:each="var, iter : ${producto.variaciones}" th:id="'var-card-' + ${iter.index}" class="card mb-3">
+        <div class="card-body">
+          <div class="mb-2">
+            <label class="form-label">Color</label>
+            <input type="text" th:name="'variaciones[' + ${iter.index} + '].color'" th:value="${var.color}" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Talla</label>
+            <input type="text" th:name="'variaciones[' + ${iter.index} + '].talla'" th:value="${var.talla}" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Precio</label>
+            <input type="number" step="0.01" th:name="'variaciones[' + ${iter.index} + '].precio'" th:value="${var.precio}" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Stock</label>
+            <input type="number" th:name="'variaciones[' + ${iter.index} + '].stock'" th:value="${var.stock}" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">URL Imagen</label>
+            <input type="text" th:name="'variaciones[' + ${iter.index} + '].imageUrl'" th:value="${var.imageUrl}" class="form-control">
+          </div>
+        </div>
+      </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
-    <a href="/admin/catalogo" class="btn btn-secondary">Cancelar</a>
+    <!-- Botón para añadir más variaciones -->
+    <button type="button" class="btn btn-outline-primary mt-2" onclick="agregarVariacion()">Añadir Variación</button>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-success">Guardar</button>
+      <a href="/admin/catalogo" class="btn btn-secondary">Cancelar</a>
+    </div>
   </form>
-
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   createHeader();
+
+  function agregarVariacion() {
+    const container = document.getElementById('variaciones-container');
+    const index = container.children.length;
+
+    const template = `
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="mb-2">
+            <label class="form-label">Color</label>
+            <input type="text" name="variaciones[${index}].color" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Talla</label>
+            <input type="text" name="variaciones[${index}].talla" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Precio</label>
+            <input type="number" step="0.01" name="variaciones[${index}].precio" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Stock</label>
+            <input type="number" name="variaciones[${index}].stock" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">URL Imagen</label>
+            <input type="text" name="variaciones[${index}].imageUrl" class="form-control">
+          </div>
+        </div>
+      </div>`;
+    container.insertAdjacentHTML('beforeend', template);
+  }
 </script>
 </body>
 </html>
