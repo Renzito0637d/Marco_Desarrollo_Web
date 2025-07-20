@@ -1,5 +1,7 @@
 package com.urbanfeet.Entity.Model;
 
+import com.urbanfeet.Entity.Direccion;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +17,5 @@ public class RegisterRequestAdmin {
     private String email;
     private String telefono;
     private String password;
+    private Direccion direccion;
 }

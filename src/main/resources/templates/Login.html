@@ -13,6 +13,7 @@
         <!--Formulario de Registro-->
         <div class="form-container sign-up">
             <form th:action="@{/registrar}" th:object="${usuario}" method="post">
+                <input type="hidden" name="origen" value="login" />
                 <h1>Crea tu cuenta</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.urbanfeet.Entity.Usuario;
+import com.urbanfeet.Entity.Rol;
 import com.urbanfeet.Repository.UsuarioRepository;
 
 @Repository
@@ -16,6 +17,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
+    }
+
+        @Override
+    public List<Usuario> obtenerUsuariosPorRol(String rol) {
+        return usuarioRepository.findByRol(Rol.valueOf(rol));
     }
 
     @Override
