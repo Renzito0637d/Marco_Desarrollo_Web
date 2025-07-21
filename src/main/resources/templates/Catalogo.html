@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div th:replace="Header :: header"></div>
+    <div th:replace="~{Header :: header}"></div>
 
     <div class="container">
         <div class="row">
@@ -178,7 +178,7 @@
     </div>
 
 
-    <div th:replace="Footer :: footer"></div>
+    <div th:replace="~{Footer :: footer}"></div>
     <script>
         const precio = document.getElementById("precio");
         const precioValor = document.getElementById("precio-valor");
