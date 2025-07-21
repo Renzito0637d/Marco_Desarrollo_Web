@@ -28,8 +28,10 @@
                         <li><a th:href="@{/MisPedidos}" class="nav-link px-2 text-white">Mis pedidos</a></li>
                     </ul>
                     <div class="text-end d-flex">
+
                         <a th:href="@{/carrito/ver}" class="btn btn-outline-light position-relative">
                             <i class="bi bi-cart-fill"></i>
+
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-cart-fill" viewBox="0 0 16 16">
                                 <path
@@ -47,11 +49,31 @@
                         </div>
 
                         <!-- Mostrar solo si está autenticado -->
-                        <div th:if="${#authorization.expression('isAuthenticated()')}">
-                            <form th:action="@{/logout}" method="post" style="display: inline;">
-                                <button type="submit" class="btn btn-danger">Cerrar sesión</button>
-                            </form>
+                        <div th:if="${#authorization.expression('isAuthenticated()')}" class="dropdown ms-3 d-flex align-items-center">
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle gap-2x"
+                               id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <!-- Ícono de usuario -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                </svg>
+                                <!-- Nombre del usuario -->
+                                <span th:text="${#authentication.principal.nombre + ' ' + #authentication.principal.apellido}" class="me-2">
+            Nombre Apellido
+        </span>
+                            </a>
+                            <!-- Menú desplegable -->
+                            <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" th:href="@{/Cuenta}">Editar perfil</a></li>
+                                <li><a class="dropdown-item" th:href="@{/direccion/configurar}">Configurar dirección</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post">
+                                        <button type="submit" class="dropdown-item text-danger">Cerrar sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
+
                     </div>
                 </div>
             </div>

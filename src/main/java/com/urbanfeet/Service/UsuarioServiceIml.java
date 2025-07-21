@@ -36,28 +36,33 @@ public class UsuarioServiceIml implements UsuarioService {
     }
 
     @Override
+    public List<Usuario> obtenerUsuariosPorRol(String rol) {
+        return usuarioDAO.obtenerUsuariosPorRol(rol);
+    }
+
+    @Override
     public Usuario obtenerUsuarioPorId(Integer id) {
         return usuarioDAO.obtenerUsuarioPorId(id);
     }
 
     @Override
     public AuthResponse guardarUsuario(RegisterRequest request) {
-        var user= Usuario.builder()
+        var user = Usuario.builder()
                 .nombre(request.getNombre())
                 .apellido(request.getApellido())
                 .email(request.getEmail())
-                .telefono(request.getTelefono())                
+                .telefono(request.getTelefono())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .rol(Rol.USER)
-                .direccion(request.getDireccion())           
+                .direccion(request.getDireccion())
                 .build();
         usuarioDAO.guardarUsuario(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder().token(jwtToken).build();
     }
-
+    
     @Override
-    public AuthResponse guardarUserAdmin(RegisterRequestAdmin request){
+    public AuthResponse guardarUserAdmin(RegisterRequestAdmin request) {
         var user = Usuario.builder()
                 .nombre(request.getNombre())
                 .apellido(request.getApellido())
@@ -65,11 +70,13 @@ public class UsuarioServiceIml implements UsuarioService {
                 .telefono(request.getTelefono())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .rol(Rol.ADMIN)
+                .direccion(request.getDireccion())
                 .build();
         usuarioDAO.guardarUsuario(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder().token(jwtToken).build();
     }
+
     @Override
     public void actualizarUsuario(Usuario usuario) {
         usuarioDAO.actualizarUsuario(usuario);
@@ -83,11 +90,9 @@ public class UsuarioServiceIml implements UsuarioService {
     @Override
     public AuthResponse autenticarUsuario(AuthenticationRequest request) {
         authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                request.getEmail(),
-                request.getPassword()
-            )
-        );
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()));
         var user = usuarioDAO.autenticarUsuario(request.getEmail());
         var jwtToken = jwtService.generateToken(user);
         return AuthResponse.builder().token(jwtToken).build();
@@ -96,6 +101,14 @@ public class UsuarioServiceIml implements UsuarioService {
     @Override
     public Usuario buscarPorEmail(String email) {
         return usuarioDAO.buscarPorEmail(email);
+
+    public void actualizarDatosPersonales(String emailActual, Usuario nuevosDatos) {
+        usuarioDAO.actualizarDatosPersonales(emailActual, nuevosDatos);
+    }
+
+    @Override
+    public Usuario obtenerPorEmail(String email) {
+        return usuarioDAO.obtenerPorEmail(email);
     }
 
 }

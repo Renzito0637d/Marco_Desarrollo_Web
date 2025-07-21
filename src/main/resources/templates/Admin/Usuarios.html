@@ -5,159 +5,261 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Urban Feet</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="/CSS/UsuariosAdmin.css">
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="/JS/HeaderAdmin.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/CSS/UsuariosAdmin.css">
+
     <script src="/JS/Usuarios.js"></script>
 </head>
 
 <body>
-<script>
-    createHeader();
-</script>
+
+    <div th:replace="~{Admin/HeaderAdmin :: header}"></div>
+
     <div class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="mb-0">Gestión de Usuarios</h4>
-            <div class="btn-group">
-                <button class="btn btn-dark" data-bs-toggle="modal"
-                    data-bs-target="#modalRegistrarUsuario">Registrar</button>
-                <button class="btn btn-outline-secondary">Consultar</button>
-                <button class="btn btn-outline-primary">Actualizar</button>
-                <button class="btn btn-outline-danger">Eliminar</button>
-            </div>
-        </div>
 
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover align-middle text-center">
-                <thead class="table-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Usuario</th>
-                        <th>Apellido</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Rol</th>
-                        <th>Teléfono</th>
-                        <th>Dirección</th>
-                        <th>Contraseña</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Ejemplo de usuario -->
-                    <tr>
-                        <td>001</td>
-                        <td>ana012</td>
-                        <td>Fuentes</td>
-                        <td>Ana</td>
-                        <td>ana.fuentes@gmail.com</td>
-                        <th>Usuario</th>
-                        <td>9 1234 5678</td>
-                        <td>Las uvas 112553</td>
-                        <td>xxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>001</td>
-                        <td>ana012</td>
-                        <td>Fuentes</td>
-                        <td>Ana</td>
-                        <td>ana.fuentes@gmail.com</td>
-                        <th>Usuario</th>
-                        <td>9 1234 5678</td>
-                        <td>Las uvas 112553</td>
-                        <td>xxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>001</td>
-                        <td>ana012</td>
-                        <td>Fuentes</td>
-                        <td>Ana</td>
-                        <td>ana.fuentes@gmail.com</td>
-                        <th>Usuario</th>
-                        <td>9 1234 5678</td>
-                        <td>Las uvas 112553</td>
-                        <td>xxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>001</td>
-                        <td>ana012</td>
-                        <td>Fuentes</td>
-                        <td>Ana</td>
-                        <td>ana.fuentes@gmail.com</td>
-                        <th>Usuario</th>
-                        <td>9 1234 5678</td>
-                        <td>Las uvas 112553</td>
-                        <td>xxxxxxxxxxxxxxx</td>
-                    </tr>
+        <h2 class="mb-3">Administradores</h2>
+        <input type="text" id="filtroAdmin" class="form-control mb-3" placeholder="Buscar administrador...">
+        <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#modalRegistrarAdmin">Agregar
+            +</button>
+        <table id="tablaAdmins" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Departamento</th>
+                    <th>Provincia</th>
+                    <th>Distrito</th>
+                    <th>Contraseña</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="admin : ${admins}">
+                    <td th:text="${admin.id}">1</td>
+                    <td th:text="${admin.nombre}">Nombre Admin</td>
+                    <td th:text="${admin.apellido}">Apellido Admin</td>
+                    <td th:text="${admin.email}">admin@email.com</td>
+                    <td th:text="${admin.direccion?.departamento}">Departamento</td>
+                    <td th:text="${admin.direccion?.provincia}">Provincia</td>
+                    <td th:text="${admin.direccion?.distrito}">Distrito</td>
+                    <td>****</td>
 
-                    <!-- Más filas aquí -->
-                </tbody>
-            </table>
-        </div>
+                    <td>
+                        <button class="btn btn-warning btn-sm"
+                            th:onclick="|editarUsuario(${admin.id}, 'ADMIN')|">Editar</button>
+                        <button class="btn btn-danger btn-sm"
+                            th:onclick="'eliminarUsuario(' + ${admin.id} + ')'">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="mt-5 mb-3">Clientes</h2>
+        <input type="text" id="filtroUser" class="form-control mb-3" placeholder="Buscar usuario...">
+        <button class="btn btn-success ms-2" onclick="abrirFormulario('USER')">Agregar +</button>
+        <table id="tablaUsers" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Departamento</th>
+                    <th>Provincia</th>
+                    <th>Distrito</th>
+                    <th>Contraseña</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}">1</td>
+                    <td th:text="${user.nombre}">Nombre User</td>
+                    <td th:text="${user.apellido}">Nombre User</td>
+                    <td th:text="${user.email}">user@email.com</td>
+                    <td th:text="${user.direccion?.departamento}">Departamento</td>
+                    <td th:text="${user.direccion?.provincia}">Provincia</td>
+                    <td th:text="${user.direccion?.distrito}">Distrito</td>
+                    <td>****</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm"
+                            th:onclick="|editarUsuario(${user.id}, 'USER')|">Editar</button>
+                        <button class="btn btn-danger btn-sm"
+                            th:onclick="'eliminarUsuario(' + ${user.id} + ')'">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
-
-    <div class="modal fade" id="modalRegistrarUsuario" tabindex="-1" aria-labelledby="modalRegistrarUsuarioLabel"
+    <!-- Modal Registrar ADMIN -->
+    <div class="modal fade" id="modalRegistrarAdmin" tabindex="-1" aria-labelledby="modalRegistrarAdminLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content border-0 shadow">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title" id="modalRegistrarUsuarioLabel">Registrar Nuevo Usuario</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="usuario" class="form-label">Nombre de Usuario</label>
-                                <input type="text" class="form-control" id="usuario" placeholder="Ej: anita42">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="correo" class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" id="correo" placeholder="usuario@ejemplo.com">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Nombre del usuario">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="apellido" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellido"
-                                    placeholder="Apellido del usuario">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" id="telefono" placeholder="Ej: 987456321">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="direccion" class="form-label">Dirección</label>
-                                <input type="text" class="form-control" id="direccion"
-                                    placeholder="Dirección del usuario">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="contrasena" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="contrasena"
-                                    placeholder="Ingresa la contraseña">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="rol" class="form-label">Rol</label>
-                                <select class="form-select" id="rol">
-                                    <option selected disabled>Seleccione un rol</option>
-                                    <option value="admin">Administrador</option>
-                                    <option value="cliente">Cliente</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-dark">Guardar</button>
-                </div>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form th:action="@{/registroAdmin}" th:object="${admin}" method="post">
+                    <div class="form-group">
+                        <input type="text" id="adminNombre" th:field="*{nombre}" placeholder="Nombre"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="adminApellido" th:field="*{apellido}" placeholder="Apellido"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="adminEmail" th:field="*{email}" placeholder="Correo"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="adminTelefono" th:field="*{telefono}" placeholder="Teléfono"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="adminPassword" th:field="*{password}" placeholder="Contraseña"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="adminCalle" th:field="*{direccion.calle}" placeholder="Calle"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="adminDistrito" th:field="*{direccion.distrito}" placeholder="Distrito"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="adminProvincia" th:field="*{direccion.provincia}" placeholder="Provincia"
+                            class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="adminDepartamento" th:field="*{direccion.departamento}"
+                            placeholder="Departamento" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar Administrador</button>
+                </form>
             </div>
         </div>
     </div>
+
+    <!-- Modal Registrar USER -->
+    <div class="modal fade" id="modalRegistrarUser" tabindex="-1" aria-labelledby="modalRegistrarUserLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form th:action="@{/registrar}" th:object="${usuario}" method="post">
+                    <input type="hidden" name="origen" value="admin" />
+                    <div class="modal-header">
+                        <h5 class="modal-title">Registrar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" id="userNombre" th:field="*{nombre}" placeholder="Nombre"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="userApellido" th:field="*{apellido}" placeholder="Apellido"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="userEmail" th:field="*{email}" placeholder="Correo"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="userTelefono" th:field="*{telefono}" placeholder="Teléfono"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="userPassword" th:field="*{password}" placeholder="Contraseña"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="userCalle" th:field="*{direccion.calle}" placeholder="Calle"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="userDistrito" th:field="*{direccion.distrito}" placeholder="Distrito"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="userProvincia" th:field="*{direccion.provincia}"
+                                placeholder="Provincia" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="userDepartamento" th:field="*{direccion.departamento}"
+                                placeholder="Departamento" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Editar Usuario -->
+    <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="formEditarUsuario" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="editarId" name="id">
+                        <input type="hidden" id="editarRol" name="rol">
+                        <input type="hidden" id="editarDireccionId" name="direccion.id">
+
+                        <div class="form-group">
+                            <input type="text" id="editarNombre" name="nombre" placeholder="Nombre"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="editarApellido" name="apellido" placeholder="Apellido"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="editarEmail" name="email" placeholder="Correo"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="editarTelefono" name="telefono" placeholder="Teléfono"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="editarCalle" name="direccion.calle" placeholder="Calle"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="editarDistrito" name="direccion.distrito" placeholder="Distrito"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="editarProvincia" name="direccion.provincia" placeholder="Provincia"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="editarDepartamento" name="direccion.departamento"
+                                placeholder="Departamento" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/usuarios.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
