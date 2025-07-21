@@ -60,6 +60,10 @@
         <span class="fw-bold text-info" th:text="${subtotal}">S/ 0.00</span>
       </p>
     </div>
+    <form th:action="@{/pedido/confirmar}" method="post">
+      <button class="btn btn-primary">Proceder al pedido</button>
+    </form>
+
   </main>
 
   <div th:replace="~{Footer :: footer}"></div>

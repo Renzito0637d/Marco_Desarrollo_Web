@@ -24,8 +24,8 @@ public class PedidoDetalle {
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "id_producto")
-    private Producto producto;
+    @JoinColumn(name = "id_producto_variacion")
+    private ProductoVariacion producto;
 
     private Integer cantidad;
     private Double precioTotal;
