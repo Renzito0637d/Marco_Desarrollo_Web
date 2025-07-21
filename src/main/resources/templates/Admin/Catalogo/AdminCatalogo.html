@@ -84,6 +84,18 @@
                    th:checked="${disponibles}">
             <label class="form-check-label" for="disponibles">Sólo con stock &gt; 0</label>
           </div>
+          <!-- Sólo con 0 stock -->
+          <div class="form-check mb-4">
+              <input class="form-check-input"
+                                 type="checkbox"
+                                 name="sinStock"
+                                 value="true"
+                                 id="sinStock"
+                                 th:checked="${sinStock}">
+              <label class="form-check-label" for="sinStock">
+                  Sólo con 0 stock
+              </label>
+          </div>
 
           <div class="d-grid gap-2 mt-2">
             <button type="submit" class="btn btn-primary w-100">Buscar</button>
@@ -168,7 +180,8 @@
                    tipo=${tipo},
                    precioMin=${precioMin},
                    precioMax=${precioMax},
-                   disponibles=${disponibles}
+                   disponibles=${disponibles},
+                   sinStock=${sinStock}
                  )}">Anterior</a>
           </li>
           <li class="page-item"
