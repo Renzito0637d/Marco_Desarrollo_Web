@@ -5,66 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:text="${producto.nombre}">Detalle Producto</title>
 
-  <!-- CSS propios -->
+  <!-- Estilos propios + Bootstrap  -->
   <link rel="stylesheet" href="/CSS/Catalogo.css">
   <link rel="stylesheet" href="/CSS/Header.css">
   <link rel="stylesheet" href="/CSS/Footer.css">
-
-  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
-  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
   <style>
-    .main-image {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      border-radius: 12px;
-      transition: transform 0.3s ease-in-out;
-    }
-    .main-image:hover {
-      transform: scale(1.02);
-    }
-    .miniaturas-wrapper {
-      margin-top: 1rem;
-    }
-    .miniatura {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border: 2px solid #ccc;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .miniatura:hover {
-      border-color: #000;
-      transform: scale(1.05);
-    }
-    .btn-talla {
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: 16px;
-      min-width: 60px;
-      text-align: center;
-      border: 2px solid transparent;
-      transition: all 0.2s ease-in-out;
-    }
-    .btn-talla:hover {
-      border-color: #0d6efd;
-      background-color: #e6f0ff;
-    }
-    .btn-talla.active {
-      background-color: #0d6efd;
-      color: white;
-      border-color: #0d6efd;
-    }
-    .btn-talla.disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+    .main-image{width:100%;height:350px;object-fit:cover;border-radius:12px;transition:transform .3s}
+    .main-image:hover{transform:scale(1.02)}
+    .miniatura{width:70px;height:70px;object-fit:cover;border:2px solid #ccc;border-radius:6px;cursor:pointer;transition:.2s}
+    .miniatura:hover{border-color:#000;transform:scale(1.05)}
+    .btn-talla{padding:10px 18px;border-radius:8px;font-weight:500;font-size:16px;min-width:60px;text-align:center;border:2px solid transparent;transition:.2s}
+    .btn-talla:hover{border-color:#0d6efd;background:#e6f0ff}
+    .btn-talla.active{background:#0d6efd;color:#fff;border-color:#0d6efd}
+    .btn-talla.disabled{opacity:.4;cursor:not-allowed}
   </style>
 
   <script src="/JS/Header.js"></script>
@@ -80,17 +36,14 @@
 
     <!-- ──────── GALERÍA ────────-->
     <div class="col-md-6">
-      <img th:src="@{${producto.variaciones[0].imageUrl}}"
-           class="main-image"
-           alt="Zapatilla">
+      <img th:src="@{${producto.variaciones[0].imageUrl}}" class="main-image" alt="Zapatilla">
 
       <div class="miniaturas-wrapper d-flex justify-content-center gap-2 flex-wrap">
-        <img th:each="var,stat:${producto.variaciones}"
+        <img th:each="var,stat : ${producto.variaciones}"
              th:if="${stat.index < 4}"
              th:src="@{${var.imageUrl}}"
              th:attr="data-img-src=@{${var.imageUrl}},data-color=${var.color},data-precio=${var.precio}"
-             class="miniatura"
-             alt="color zapatilla">
+             class="miniatura" alt="color zapatilla">
       </div>
     </div>
 
@@ -109,30 +62,25 @@
         <strong>Precio:</strong>
         <span id="precio-var" th:text="'S/ '+${producto.variaciones[0].precio}">S/ 0.00</span>
       </p>
-      <p class="mb-2">
-        <strong>Color:</strong>
-        <span id="color-var" class="badge text-bg-light" th:text="${producto.variaciones[0].color}">Color</span>
+      <p class="mb-2"><strong>Color:</strong>
+        <span id="color-var" class="badge text-bg-light"
+              th:text="${producto.variaciones[0].color}">Color</span>
       </p>
 
       <!-- ──────── FORMULARIO CARRITO ────────-->
       <form th:action="@{/carrito/agregar}" method="post">
-        <input type="hidden" name="productoId" th:value="${producto.id}">
-        <input type="hidden" name="colorSeleccionado" id="inputColor" th:value="${producto.variaciones[0].color}">
-        <input type="hidden" name="precioSeleccionado" id="inputPrecio" th:value="${producto.variaciones[0].precio}">
-        <input type="hidden" name="talla" id="tallaSeleccionada" required>
+        <input type="hidden" name="productoId"        th:value="${producto.id}">
+        <input type="hidden" name="colorSeleccionado" id="inputColor"  th:value="${producto.variaciones[0].color}">
+        <input type="hidden" name="precioSeleccionado"id="inputPrecio" th:value="${producto.variaciones[0].precio}">
+        <input type="hidden" name="talla"             id="tallaSeleccionada" required>
 
-        <a href="#" class="d-block mb-2" data-bs-toggle="modal" data-bs-target="#guiaTallasModal">
-          Guía de tallas
-        </a>
-
-        <!-- MODAL -->
-        <div class="modal fade" id="guiaTallasModal" tabindex="-1" aria-labelledby="guiaTallasLabel" aria-hidden="true">
+        <!-- Guía de tallas (modal) -->
+        <a href="#" class="d-block mb-2" data-bs-toggle="modal" data-bs-target="#guiaTallasModal">Guía de tallas</a>
+        <div class="modal fade" id="guiaTallasModal" tabindex="-1">
           <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="guiaTallasLabel">Guía de tallas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-              </div>
+              <div class="modal-header"><h5 class="modal-title">Guía de tallas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
               <div class="modal-body p-0">
                 <img src="/IMG/guia-tallas.png" alt="Guía de tallas" class="img-fluid w-100">
               </div>
@@ -142,14 +90,14 @@
 
         <!-- BOTONES DE TALLAS -->
         <h5 class="mt-4">Selecciona una talla</h5>
-        <div class="d-flex flex-wrap gap-2">
+        <div id="tallasWrapper" class="d-flex flex-wrap gap-2">
           <button type="button"
                   th:each="var : ${producto.variaciones}"
+                  th:data-color="${var.color}"
+                  th:data-stock="${var.stock}"
                   th:data-talla="${var.talla}"
                   th:text="${var.talla}"
-                  th:disabled="${var.stock == 0}"
-                  th:classappend="${var.stock > 0} ? 'btn btn-talla btn-outline-primary talla-btn' : 'btn btn-talla btn-outline-secondary disabled'"
-                  class="talla-btn">
+                  class="btn btn-talla talla-btn">
           </button>
         </div>
 
@@ -157,7 +105,7 @@
           <i class="bi bi-cart-plus"></i> Agregar al carrito
         </button>
       </form>
-    </div><!-- /col-md-6 info -->
+    </div><!-- /info -->
   </div><!-- /row -->
 </div><!-- /container -->
 
@@ -169,34 +117,69 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const mainImg  = document.querySelector('.main-image');
-    const precioEl = document.getElementById('precio-var');
-    const colorEl  = document.getElementById('color-var');
-    const inColor  = document.getElementById('inputColor');
-    const inPrecio = document.getElementById('inputPrecio');
 
-    document.querySelectorAll('.miniatura').forEach(m => {
-      m.addEventListener('click', () => {
+    /* ─── Referencias básicas ─────────────────────────────────────────── */
+    const mainImg   = document.querySelector('.main-image');
+    const precioEl  = document.getElementById('precio-var');
+    const colorEl   = document.getElementById('color-var');
+    const inColor   = document.getElementById('inputColor');
+    const inPrecio  = document.getElementById('inputPrecio');
+    const tallaBtns = document.querySelectorAll('.talla-btn');
+    const tallaIn   = document.getElementById('tallaSeleccionada');
+
+    /* ─── Función que refresca las tallas según color ─────────────────── */
+    function refreshTallas(color){
+      // Reiniciar selección
+      tallaIn.value = '';
+      tallaBtns.forEach(btn=>{
+        // Coincide color?
+        if(btn.dataset.color === color){
+          btn.style.display = 'inline-block';
+          // Habilitar / deshabilitar según stock
+          if(parseInt(btn.dataset.stock) > 0){
+            btn.disabled = false;
+            btn.classList.remove('disabled','btn-outline-secondary');
+            btn.classList.add('btn-outline-primary');
+          }else{
+            btn.disabled = true;
+            btn.classList.add('disabled','btn-outline-secondary');
+            btn.classList.remove('btn-outline-primary','active');
+          }
+        }else{
+          // Ocultar si es de otro color
+          btn.style.display = 'none';
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    /* ─── Inicializar con el primer color ─────────────────────────────── */
+    refreshTallas(inColor.value);
+
+    /* ─── Cambiar imagen / precio / color al pulsar miniatura ─────────── */
+    document.querySelectorAll('.miniatura').forEach(m=>{
+      m.addEventListener('click', ()=>{
         mainImg.src          = m.dataset.imgSrc;
         colorEl.textContent  = m.dataset.color;
         precioEl.textContent = 'S/ ' + parseFloat(m.dataset.precio).toFixed(2);
         inColor.value        = m.dataset.color;
         inPrecio.value       = m.dataset.precio;
+
+        refreshTallas(m.dataset.color);
       });
     });
 
-    const tallaBtns = document.querySelectorAll('.talla-btn');
-    const tallaInput = document.getElementById('tallaSeleccionada');
-
-    tallaBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tallaBtns.forEach(b => b.classList.remove('active'));
+    /* ─── Seleccionar talla ───────────────────────────────────────────── */
+    tallaBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(btn.disabled) return;                 // No hacer nada si no hay stock
+        tallaBtns.forEach(b=>b.classList.remove('active'));
         btn.classList.add('active');
-        tallaInput.value = btn.dataset.talla;
+        tallaIn.value = btn.dataset.talla;
       });
     });
+
   });
 </script>
-
 </body>
 </html>
