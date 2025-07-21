@@ -101,7 +101,7 @@ public class UsuarioServiceIml implements UsuarioService {
     @Override
     public Usuario buscarPorEmail(String email) {
         return usuarioDAO.buscarPorEmail(email);
-
+    }
     public void actualizarDatosPersonales(String emailActual, Usuario nuevosDatos) {
         usuarioDAO.actualizarDatosPersonales(emailActual, nuevosDatos);
     }

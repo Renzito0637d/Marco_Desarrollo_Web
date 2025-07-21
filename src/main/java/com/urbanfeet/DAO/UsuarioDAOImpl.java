@@ -56,8 +56,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     public void actualizarDatosPersonales(String emailActual, Usuario nuevosDatos) {
-        Usuario usuario = usuarioRepository.findByEmail(emailActual)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Usuario usuario = usuarioRepository.findByEmail(emailActual);
 
         usuario.setNombre(nuevosDatos.getNombre());
         usuario.setApellido(nuevosDatos.getApellido());
@@ -69,8 +68,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario obtenerPorEmail(String email) {
-        return usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return usuarioRepository.findByEmail(email);
     }
 
 

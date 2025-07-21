@@ -27,11 +27,11 @@ public class AdminController {
     @GetMapping("/productos")
     public String verProductos() {
         return "admin/Productos"; // templates/admin/Productos.html
-
+    }
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("admin/Usuarios")
+    @GetMapping("/usuarios")
     public String getUsuarios(Model model) {
         model.addAttribute("admins", usuarioService.obtenerUsuariosPorRol("ADMIN"));
         model.addAttribute("users", usuarioService.obtenerUsuariosPorRol("USER"));
@@ -45,11 +45,6 @@ public class AdminController {
         model.addAttribute("usuario", usuario);
         
         return "Admin/Usuarios";
-    }
-
-    @GetMapping("/usuarios")
-    public String verUsuarios() {
-        return "admin/Usuarios"; // templates/admin/Usuarios.html
     }
 
     @GetMapping("/almacen")
