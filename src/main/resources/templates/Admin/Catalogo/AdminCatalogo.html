@@ -131,11 +131,10 @@
 
           <!-- Stock desde la primera variación -->
           <td class="text-center"
-              th:text="${p.variaciones != null and !#lists.isEmpty(p.variaciones) ? p.variaciones[0].stock : 'N/A'}"
-              th:classappend="${p.variaciones != null and !#lists.isEmpty(p.variaciones) ?
-                (p.variaciones[0].stock == 0 ? ' text-danger' :
-                 (p.variaciones[0].stock < 10 ? ' text-warning' : '')) : ''}">
+              th:text="${p.stockTotal}"
+              th:classappend="${p.stockTotal == 0 ? ' text-danger' : (p.stockTotal < 10 ? ' text-warning' : '')}">
           </td>
+
 
           <td class="text-center">
             <a class="btn btn-sm btn-outline-primary"
