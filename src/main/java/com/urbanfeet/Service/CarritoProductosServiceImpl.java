@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.urbanfeet.DAO.CarritoProductosDAO;
+import com.urbanfeet.Entity.Carrito;
 import com.urbanfeet.Entity.CarritoProductos;
 
 @Service
@@ -38,6 +39,11 @@ public class CarritoProductosServiceImpl implements CarritoProductosService {
     @Override
     public void eliminarCarritoProducto(Integer id) {
         carritoProductosDAO.eliminarCarritoProducto(id);
+    }
+
+    @Override
+    public void eliminarPorCarrito(Carrito carrito) {
+        carritoProductosDAO.eliminarPorCarrito(carrito);
     }
 
     

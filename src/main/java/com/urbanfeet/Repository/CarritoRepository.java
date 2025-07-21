@@ -11,4 +11,5 @@ import com.urbanfeet.Entity.Usuario;
 @Repository
 public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
     Optional<Carrito> findByUsuario(Usuario usuario);
+    Optional<Carrito> findByUsuarioId(Integer usuarioId);
 }

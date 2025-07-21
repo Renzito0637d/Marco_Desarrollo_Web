@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.urbanfeet.Entity.Carrito;
 import com.urbanfeet.Entity.CarritoProductos;
 import com.urbanfeet.Repository.CarritoProductosRepository;
 
@@ -60,6 +61,11 @@ public class CarritoProductosDAOImpl implements CarritoProductosDAO {
     public List<CarritoProductos> listaCarritoProductosPorProductoId(Integer productoId) {
         // Implementation here
         return null;
+    }
+
+    @Override
+    public void eliminarPorCarrito(Carrito carrito) {
+        carritoProductosRepository.deleteAll(carrito.getProductos());
     }
     
 }

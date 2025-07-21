@@ -20,6 +20,7 @@ import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -46,6 +47,7 @@ public class Usuario implements UserDetails{
     @JoinColumn(name = "direccion_id")
     private Direccion direccion;
 
+    @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Carrito carrito;
 
