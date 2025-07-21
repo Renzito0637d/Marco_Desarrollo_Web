@@ -80,12 +80,12 @@ public class ProductoController {
     @GetMapping("/{id}/editar")
     @PreAuthorize("hasRole('ADMIN')")
     public String formEditarProducto(@PathVariable int id, Model model) {
-        Producto producto = productoService.obtener(id);  // Obtener producto por ID
+        Producto producto = productoService.obtener(id); 
         if (producto == null) {
             throw new IllegalArgumentException("Producto no encontrado");
         }
-        model.addAttribute("producto", producto);         // Pasarlo al modelo
-        return "admin/catalogo/ProductoEditar";             // La vista a cargar
+        model.addAttribute("producto", producto);      
+        return "admin/catalogo/ProductoEditar";     
     }
 
     @PostMapping("/{id}/editar")
@@ -101,18 +101,31 @@ public class ProductoController {
         } catch (Exception e) {
             model.addAttribute("producto", producto);
             model.addAttribute("error", "Hubo un error al editar el producto: " + e.getMessage());
-            return "admin/catalogo/ProductoEditar";  // Redirige a la página de editar producto
+            return "admin/catalogo/ProductoEditar"; 
         }
         return "redirect:/admin/catalogo";
     }
 
-    // Ver detalle del producto (disponible para todos los usuarios)
     @GetMapping("/{id}")
     public String verProducto(@PathVariable int id, Model model) {
-        model.addAttribute("producto", productoService.obtener(id));
+        Producto producto = productoService.obtener(id);
+
+        if (producto != null && producto.getVariaciones() != null) {
+            producto.getVariaciones().sort((v1, v2) -> {
+                try {
+                    // Si las tallas son numéricas (por ejemplo: "37", "38", "39")
+                    return Integer.compare(Integer.parseInt(v1.getTalla()), Integer.parseInt(v2.getTalla()));
+                } catch (NumberFormatException e) {
+                    // Si hay alguna talla tipo "S", "M", "L", o texto, ordenar alfabéticamente
+                    return v1.getTalla().compareToIgnoreCase(v2.getTalla());
+                }
+            });
+        }
+
+        model.addAttribute("producto", producto);
         return "public/producto-detalle";
     }
-
+    
     // Eliminar producto (solo para admin)
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
