@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -12,11 +12,15 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="/JS/HeaderAdmin.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/CSS/UsuariosAdmin.css">
+
     <script src="/JS/Usuarios.js"></script>
 </head>
 
 <body>
+
     <div th:replace="~{Admin/HeaderAdmin :: header}"></div>
+
     <div class="container mt-4">
 
         <h2 class="mb-3">Administradores</h2>

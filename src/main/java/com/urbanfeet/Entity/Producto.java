@@ -1,18 +1,18 @@
 package com.urbanfeet.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,7 +22,17 @@ public class Producto {
     private String marca;
     private String genero;
     private String tipo;
-    private String colores;
-    private Double precio;
-    private Integer stock;
+
+    // Relación uno a muchos con producto_variacion
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Valid
+    private List<ProductoVariacion> variaciones = new ArrayList<>();
+
+    public int getStockTotal() {
+        if (variaciones == null) return 0;
+        return variaciones.stream()
+                .mapToInt(v -> v.getStock() != null ? v.getStock() : 0)
+                .sum();
+    }
+
 }

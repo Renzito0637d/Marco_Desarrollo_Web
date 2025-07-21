@@ -20,236 +20,156 @@
     <div th:replace="Header :: header"></div>
 
     <div class="container">
+        <div class="row">
         <!-- Filtros -->
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="filters">
-                    <h5 class="mb-4">Filtrar por:</h5>
-                    <div class="mb-2">
-                        <label class="form-label">Marcas</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="Nike" id="marcaNike">
-                            <label class="form-check-label" for="marcaNike">NIKE</label>
+            <aside class="col-md-3">
+                <form th:action="@{/catalogo}" method="get">
+                    <div class="filters">
+                        <h5 class="mb-4">Filtrar por:</h5>
+
+                        <!-- Marcas (select múltiple) -->
+                        <div class="mb-4">
+                            <label for="marcas" class="form-label">Marcas</label>
+                            <select class="form-select" id="marcas" name="marcas">
+                                <option value="" th:selected="${marcas == null or marcas == ''}">Todos</option>
+                                <option value="Nike" th:selected="${marcas != null and #lists.contains(marcas, 'Nike')}">Nike</option>
+                                <option value="Adidas" th:selected="${marcas != null and #lists.contains(marcas, 'Adidas')}">Adidas</option>
+                                <option value="iRun" th:selected="${marcas != null and #lists.contains(marcas, 'iRun')}">I-RUN</option>
+                                <option value="Puma" th:selected="${marcas != null and #lists.contains(marcas, 'Puma')}">Puma</option>
+                                <option value="Converse" th:selected="${marcas != null and #lists.contains(marcas, 'Converse')}">Converse</option>
+                                <option value="Reebok" th:selected="${marcas != null and #lists.contains(marcas, 'Reebok')}">Reebok</option>
+                                <option value="Vans" th:selected="${marcas != null and #lists.contains(marcas, 'Vans')}">Vans</option>
+                                <option value="Punto ORIGINAL" th:selected="${marcas != null and #lists.contains(marcas, 'Punto ORIGINAL')}">Punto ORIGINAL</option>
+                                <option value="New Athletic" th:selected="${marcas != null and #lists.contains(marcas, 'New Athletic')}">New Athletic</option>
+                                <option value="Atletix" th:selected="${marcas != null and #lists.contains(marcas, 'Atletix')}">Atletix</option>
+                                <option value="Asics" th:selected="${marcas != null and #lists.contains(marcas, 'Asics')}">Asics</option>
+                                <option value="New Balance" th:selected="${marcas != null and #lists.contains(marcas, 'New Balance')}">New Balance</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="Adidas" id="marcaAdidas">
-                            <label class="form-check-label" for="marcaAdidas">Adidas</label>
+
+
+                        <!-- Género -->
+                        <div class="mb-4">
+                            <label for="genero" class="form-label">Género</label>
+                            <select class="form-select" id="genero" name="genero">
+                                <option value="" th:selected="${genero == null or genero == ''}">Todos</option>
+                                <option value="Hombre" th:selected="${genero == 'Hombre'}">Hombre</option>
+                                <option value="Mujer"   th:selected="${genero == 'Mujer'}">Mujer</option>
+                                <option value="Unisex"    th:selected="${genero == 'Unisex'}">Unisex</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="iRun" id="marcaIrun">
-                            <label class="form-check-label" for="marcaIrun">I-RUN</label>
+
+                        <!-- Tipo -->
+                        <div class="mb-4">
+                            <label for="tipo" class="form-label">Tipo</label>
+                            <select class="form-select" id="tipo" name="tipo">
+                                <option value="" th:selected="${tipo == null or tipo == ''}">Todos</option>
+                                <option value="Running"   th:selected="${tipo == 'Running'}">Running</option>
+                                <option value="Futbol"    th:selected="${tipo == 'Futbol'}">Futbol</option>
+                                <option value="Training"  th:selected="${tipo == 'Training'}">Training</option>
+                                <option value="Outdoor"   th:selected="${tipo == 'Outdoor'}">Outdoor</option>
+                                <option value="Sneakers"  th:selected="${tipo == 'Sneakers'}">Sneakers</option>
+                                <option value="Lifestyle" th:selected="${tipo == 'Lifestyle'}">Lifestyle</option>
+                                <option value="Otros"     th:selected="${tipo == 'Otros'}">Otros</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="iRun" id="marcaPunto">
-                            <label class="form-check-label" for="marcaPunto">Punto ORIGINAL</label>
+                        <div class="d-grid gap-2 mt-2">
+                            <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                            <a th:href="@{/catalogo}" class="btn btn-primary w-100">Limpiar filtros</a>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="iRun" id="marcaNew">
-                            <label class="form-check-label" for="marcaNew">New Athletic</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="iRun" id="marcaAtletix">
-                            <label class="form-check-label" for="marcaAtletix">Atletix</label>
+                    </div>
+                </form>
+            </aside>
+
+                        <!-- Catálogo de productos -->
+        <div class="col-md-9">
+            <div class="row g-4" th:if="${productos != null}">
+                <div class="col-md-4" th:each="producto : ${productos}">
+                    <div class="card" th:attr="data-product-id=${producto.id}">
+                        <img th:if="${producto.variaciones.size() > 0}"
+                             th:src="@{${producto.variaciones[0].imageUrl}}"
+                             class="card-img-top main-image"
+                             alt="Zapatilla">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${producto.nombre}">Nombre</h5>
+                            <p class="card-text mb-1"
+                               th:if="${producto.variaciones.size() > 0}"
+                               th:text="'S/ ' + ${producto.variaciones[0].precio}">S/ 0.00</p>
+                            <p class="text-muted small color-info"
+                               th:if="${producto.variaciones.size() > 0}"
+                               th:text="'Color: ' + ${producto.variaciones[0].color}">Color</p>
+
+                            <!-- Miniaturas de colores (máx 3) -->
+                            <div class="d-flex justify-content-center flex-wrap gap-2 mb-3">
+                                <img th:each="var, stat : ${producto.variaciones}"
+                                     th:if="${stat.index < 3}"
+                                     th:src="@{${var.imageUrl}}"
+                                     th:alt="'Color ' + ${var.color}"
+                                     th:attr="data-img-src=@{${var.imageUrl}}, data-color=${var.color}, data-precio=${var.precio}"
+                                     class="miniatura">
+                            </div>
+
+                            <a class="btn btn-outline-primary w-100"
+                               th:href="@{/producto/{id}(id=${producto.id})}">Ver más</a>
                         </div>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="genero" class="form-label">Género</label>
-                        <select class="form-select" id="genero">
-                            <option value="">Todos</option>
-                            <option>Hombre</option>
-                            <option>Mujer</option>
-                            <option>Niño</option>
-                            <option>Niña</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="marca" class="form-label">Tipo</label>
-                        <select class="form-select" id="tipo">
-                            <option value="">Todos</option>
-                            <option>Running</option>
-                            <option>Futbol</option>
-                            <option>Training</option>
-                            <option>Outdoor</option>
-                            <option>Sneakers</option>
-                            <option>lifestyle</option>
-                            <option>Otros</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="color" class="form-label">Color</label>
-                        <select class="form-select" id="color">
-                            <option value="">Todos</option>
-                            <option>Negro</option>
-                            <option>Blanco</option>
-                            <option>Rojo</option>
-                            <option>Azul</option>
-                            <option>Otros</option>
-                        </select>
-                    </div>
 
-                    <div class="mb-4">
-                        <label for="precio" class="form-label">Precio</label>
-                        <input type="range" class="form-range" min="0" max="3000" step="10" id="precio">
-                        <span id="precio-valor">S/150</span>
-                    </div>
-                    <button class="btn btn-primary w-100">Buscar</button>
                 </div>
             </div>
+            <!-- Paginación -->
+            <nav th:if="${productos.totalPages > 1}" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${productos.first} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/catalogo(
+                       page=${productos.number - 1},
+                       size=${productos.size},
+                       marcas=${marcas},
+                       genero=${genero},
+                       tipo=${tipo},
+                       color=${color}
+                   )}">
+                            Anterior
+                        </a>
+                    </li>
 
-            <!-- Catálogo de productos -->
-            <div class="col-md-9">
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(0, productos.totalPages - 1)}"
+                        th:classappend="${i == productos.number} ? 'active'">
+                        <a class="page-link"
+                           th:text="${i + 1}"
+                           th:href="@{/catalogo(
+                       page=${i},
+                       size=${productos.size},
+                       marcas=${marcas},
+                       genero=${genero},
+                       tipo=${tipo},
+                       color=${color}
+                   )}"></a>
+                    </li>
 
-                <div class="container-fluid">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-
-                <div class="row g-4">
-                    <!-- Producto 1 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap1.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Nike Revolution 7</h5>
-                                <p class="card-text">S/ 219.90</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 2 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap2.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Chimpunes predator</h5>
-                                <p class="card-text">S/ 349.00</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 3 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap3.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Zapatillas Freestyle</h5>
-                                <p class="card-text">S/ 159.00</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 1 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap1.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Nike Revolution 7</h5>
-                                <p class="card-text">S/ 219.90</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 2 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap2.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Chimpunes predator</h5>
-                                <p class="card-text">S/ 349.00</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 3 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap3.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Zapatillas Freestyle</h5>
-                                <p class="card-text">S/ 159.00</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 1 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap1.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Nike Revolution 7</h5>
-                                <p class="card-text">S/ 219.90</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 2 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap2.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Chimpunes predator</h5>
-                                <p class="card-text">S/ 349.00</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Producto 3 -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="/IMG/novedadZap3.png" class="card-img-top" alt="Zapatilla">
-                            <div class="card-body">
-                                <h5 class="card-title">Zapatillas Freestyle</h5>
-                                <p class="card-text">S/ 159.00</p>
-                                <button class="btn btn-outline-primary w-100">Ver más</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <nav aria-label="Page navigation example" class="mt-4  d-flex justify-content-center align-items-center">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true"><<</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true"><</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">></span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">>></span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-            </div>
+                    <li class="page-item" th:classappend="${productos.last} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/catalogo(
+                       page=${productos.number + 1},
+                       size=${productos.size},
+                       marcas=${marcas},
+                       genero=${genero},
+                       tipo=${tipo},
+                       color=${color}
+                   )}">
+                            Siguiente
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </div>
+        </div>
+        </div>
 
-    <div th:replace="Footer :: footer"></div>
+
+            <div th:replace="Footer :: footer"></div>
     <script>
         const precio = document.getElementById("precio");
         const precioValor = document.getElementById("precio-valor");
@@ -257,6 +177,38 @@
             precioValor.textContent = `S/${precio.value}`;
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const miniaturas = card.querySelectorAll('.miniatura');
+                const mainImage = card.querySelector('.main-image');
+                const colorText = card.querySelector('.color-info');
+                const precioText = card.querySelector('.card-text.mb-1');
+
+                miniaturas.forEach(mini => {
+                    mini.addEventListener('click', function () {
+                        const newSrc = this.getAttribute('data-img-src');
+                        const newColor = this.getAttribute('data-color');
+                        const newPrecio = this.getAttribute('data-precio');
+
+                        if (mainImage && newSrc) {
+                            mainImage.src = newSrc;
+                        }
+                        if (colorText && newColor) {
+                            colorText.textContent = 'Color: ' + newColor;
+                        }
+                        if (precioText && newPrecio) {
+                            precioText.textContent = 'S/ ' + parseFloat(newPrecio).toFixed(2);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>

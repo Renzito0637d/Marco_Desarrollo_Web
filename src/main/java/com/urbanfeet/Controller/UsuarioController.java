@@ -54,7 +54,7 @@ public class UsuarioController {
         // model.addAttribute("jwt", response.getToken());
         // return "redirect:/registro";
         if ("admin".equals(origen)) {
-            return "redirect:/admin/Usuarios";
+            return "redirect:/admin/usuarios";
         } else {
             return "redirect:/IniciaSesion"; // o a donde quieras que vaya el usuario común
         }
@@ -70,7 +70,7 @@ public class UsuarioController {
     @PostMapping("/registroAdmin")
     public String registrarAdminDesdeFormulario(@ModelAttribute("admin") RegisterRequestAdmin request) {
         usuarioService.guardarUserAdmin(request);
-        return "redirect:/admin/Usuarios";
+        return "redirect:/admin/usuarios";
     }
 
     @GetMapping("/registro")

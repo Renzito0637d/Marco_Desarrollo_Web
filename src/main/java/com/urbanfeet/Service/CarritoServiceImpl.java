@@ -1,12 +1,14 @@
 package com.urbanfeet.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.urbanfeet.DAO.CarritoDAO;
 import com.urbanfeet.Entity.Carrito;
+import com.urbanfeet.Entity.Usuario;
 
 @Service
 public class CarritoServiceImpl implements CarritoService {
@@ -37,6 +39,11 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     public void eliminarCarrito(Integer id) {
         carritoDAO.eliminarCarrito(id);
+    }
+
+    @Override
+    public Optional<Carrito> buscarPorUsuario(Usuario usuario) {
+        return carritoDAO.buscarPorUsuario(usuario);
     }
     
 }

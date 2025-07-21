@@ -26,7 +26,7 @@ public class AuthCustom implements AuthenticationSuccessHandler{
 
         // Redirigir según el rol
         if (role.contains("ROLE_ADMIN")) {
-            response.sendRedirect("/admin/Productos");  // Redirige al panel de administración
+            response.sendRedirect("/admin/catalogo");  // Redirige al panel de administración
         } else {
             response.sendRedirect("/inicio");  // Redirige al panel de usuario
         }
