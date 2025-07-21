@@ -16,5 +16,6 @@ public interface UsuarioService {
 
     public void actualizarDatosPersonales(String emailActual, Usuario nuevosDatos);
     public Usuario obtenerPorEmail(String email);
+    public void actualizarUsuario(Usuario usuario);
     public void eliminarUsuario(Integer id);
 }
