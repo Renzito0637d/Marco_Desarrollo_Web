@@ -28,4 +28,11 @@ public class Producto {
     @Valid
     private List<ProductoVariacion> variaciones = new ArrayList<>();
 
+    public int getStockTotal() {
+        if (variaciones == null) return 0;
+        return variaciones.stream()
+                .mapToInt(v -> v.getStock() != null ? v.getStock() : 0)
+                .sum();
+    }
+
 }
